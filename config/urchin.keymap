@@ -55,11 +55,11 @@
 	combos {
 		compatible = "zmk,combos";
 		// both right thumb keys
-		combo_accent {
-			timeout-ms = <200>;
-			key-positions = <32 33>;
-			bindings = <&mo ACCENT>;
-		};
+		// combo_accent {
+		//	timeout-ms = <200>;
+		//	key-positions = <32 33>;
+		//	bindings = <&mo ACCENT>;
+		// };
 		// internal-left & external-right thumb keys
 		combo_sym2 {
 			timeout-ms = <200>;
