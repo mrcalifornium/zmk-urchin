@@ -63,13 +63,11 @@
         //	bindings = <&mo ACCENT>;
         // };
         // internal-left & external-right thumb keys
-
         // combo_sym2 {
         //     timeout-ms = <200>;
         //     key-positions = <31 33>;
         //     bindings = <&mo 0>;
         // };
-
         // both left thumb keys
 
         combo_settings {
@@ -81,10 +79,10 @@
         // left index & middle fingers (home-row)
         // hold control & space for Adobe workflow
 
-        combo_ctrl_space {
+        combo_alt_space {
             timeout-ms = <200>;
             key-positions = <12 13>;
-            bindings = <&kp LC(SPACE)>;
+            bindings = <&kp LA(SPACE)>;
             layers = <0>;
         };
     };
@@ -111,7 +109,7 @@
             bindings = <
 &kp EXCL      &kp AT_SIGN   &kp HASH      &kp DOLLAR        &kp PERCENT          &kp CARET     &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
 &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4      &kp N5               &kp NUMBER_6  &kp N7         &kp N8        &kp N9                &kp N0
-&kp TILDE     &none         &none         &kp LEFT_BRACKET  &kp RIGHT_BRACKET    &kp SQT       &kp BSLH       &none         &none                 &none
+&kp TILDE     &none         &none         &kp LEFT_BRACKET  &kp RIGHT_BRACKET    &kp SQT       &kp BSLH       &kp MINUS     &kp EQUAL             &none
                                           &mo 3             &none                &trans        &trans
             >;
         };
@@ -139,7 +137,6 @@
                                 &none      &none       &none    &none
             >;
         };
-
 
         // Used to change the keyboard's settings.
 
