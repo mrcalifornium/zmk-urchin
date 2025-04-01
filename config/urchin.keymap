@@ -85,11 +85,6 @@
             bindings = <&kp LA(SPACE)>;
             layers = <0>;
         };
-
-        zones {
-            bindings = <&kp LS(LG(GRAVE))>;
-            key-positions = <16 17>;
-        };
     };
 
     keymap {
@@ -124,10 +119,10 @@
         ext_layer {
             label = "Mods";
             bindings = <
-&kp ESC    &kp C_PREV  &kp C_PP    &kp C_NEXT  &kp C_PAUSE           &kp PG_UP     &kp HOME  &kp UP         &kp END    &kp CAPS
-&sk LALT   &sk LGUI    &sk LSHIFT  &sk LCTRL   &sk LA(LEFT_SHIFT)    &kp PG_DN     &kp LEFT  &kp DOWN       &kp RIGHT  &kp DEL
-&kp LC(Z)  &kp LC(X)   &kp LC(C)   &kp TAB     &kp LC(V)             &kp LC(BSPC)  &kp BSPC  &kp LG(SPACE)  &trans     &trans
-&trans     &kp LCTRL                                                                                        &kp ENTER  &mo 3
+&kp ESC    &kp C_PREV  &kp C_PP    &kp C_NEXT  &kp C_PAUSE                   &kp PG_UP     &kp HOME  &kp UP         &kp END    &kp CAPS
+&sk LALT   &sk LGUI    &sk LSHIFT  &sk LCTRL   &sk LA(LC(LG(LEFT_SHIFT)))    &kp PG_DN     &kp LEFT  &kp DOWN       &kp RIGHT  &kp DEL
+&kp LC(Z)  &kp LC(X)   &kp LC(C)   &kp TAB     &kp LC(V)                     &kp LC(BSPC)  &kp BSPC  &kp LG(SPACE)  &trans     &trans
+&trans     &kp LCTRL                                                                                                &kp ENTER  &mo 3
             >;
         };
 
@@ -156,4 +151,3 @@
         };
     };
 };
-
