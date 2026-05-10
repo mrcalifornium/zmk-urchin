@@ -131,6 +131,19 @@
             bindings = <&tog MOUSE>;
             layers = <BASE MOUSE>;
         };
+
+        // F+J (both index fingers, home row) -> sticky Hyper modifier
+        // (Ctrl+Alt+Win+Shift). Tap once, then a letter, and an
+        // AutoHotkey script on the host catches Hyper+letter to
+        // launch / focus apps. Cross-hand chord = effectively zero
+        // misfire risk.
+
+        combo_hyper {
+            timeout-ms = <40>;
+            key-positions = <13 16>;
+            bindings = <&sk LC(LA(LG(LSHIFT)))>;
+            layers = <BASE>;
+        };
     };
 
     keymap {
