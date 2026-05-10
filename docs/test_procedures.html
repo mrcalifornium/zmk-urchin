@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urchin — Post-Flash Test Protocol</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1f2330;
+    --border: #2a2f3d;
+    --text: #e7e9ee;
+    --muted: #98a0ad;
+    --accent: #7c9cff;
+    --good: #6dd29c;
+    --bad: #ff7a7a;
+    --kbd-bg: #2a2f3d;
+    --kbd-border: #3a4151;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --panel-2: #f0f2f6;
+      --border: #d8dde5;
+      --text: #1a1d23;
+      --muted: #5a6470;
+      --accent: #3056d3;
+      --good: #1e8e5a;
+      --bad: #c4392f;
+      --kbd-bg: #ebeef3;
+      --kbd-border: #c2cad6;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    line-height: 1.55;
+    padding: 32px 16px 64px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .sub {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .progress-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 18px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--panel-2);
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 180px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .progress-label {
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  button {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  section.step {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  section.step h2 {
+    font-size: 17px;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .num {
+    background: var(--accent);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .step.done h2 .num { background: var(--good); }
+  section.step .desc {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  ul.checks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.checks li {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--border);
+  }
+  ul.checks li:first-child { border-top: none; }
+  ul.checks li input {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  ul.checks li label {
+    cursor: pointer;
+    flex: 1;
+  }
+  ul.checks li.checked label {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .fail {
+    background: var(--panel-2);
+    border-left: 3px solid var(--bad);
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    border-radius: 4px;
+  }
+  .fail b { color: var(--bad); }
+  kbd {
+    background: var(--kbd-bg);
+    border: 1px solid var(--kbd-border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12.5px;
+    background: var(--panel-2);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  footer {
+    margin-top: 28px;
+    padding: 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer code { font-size: 12px; }
+  @media print {
+    body { background: white; color: black; padding: 12mm; }
+    .progress-card, button { display: none; }
+    section.step { break-inside: avoid; border: 1px solid #ccc; }
+    .num { background: #444 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Urchin — Post-Flash Test Protocol</h1>
+    <div class="sub">Run sequentially. Stop on first failure — the failure mode points at the cause.</div>
+  </header>
+
+  <div class="progress-card">
+    <div class="progress-label" id="progressText">0 / 0 checks</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <button onclick="resetAll()">Reset all</button>
+  </div>
+
+  <section class="step" data-step="0">
+    <h2><span class="num">0</span>Prerequisites</h2>
+    <div class="desc">Get into a clean starting state.</div>
+    <ul class="checks">
+      <li><input type="checkbox" id="c0-1"><label for="c0-1">Both halves flashed with the new firmware (<code>urchin_left.uf2</code> and <code>urchin_right.uf2</code>).</label></li>
+      <li><input type="checkbox" id="c0-2"><label for="c0-2">Both halves powered on, paired and connected on the same Bluetooth profile.</label></li>
+      <li><input type="checkbox" id="c0-3"><label for="c0-3">PowerToys FancyZones running with Split Screen on the ultrawide and Fullscreen on the thinkvision.</label></li>
+    </ul>
+  </section>
+
+  <section class="step" data-step="1">
+    <h2><span class="num">1</span>Sanity — typing still works</h2>
+    <div class="desc">New combos must not misfire during normal typing.</div>
+    <ul class="checks">
+      <li><input type="checkbox" id="c1-1"><label for="c1-1">Type <code>the quick brown fox jumps over the lazy dog</code>. All letters appear, nothing duplicates, nothing drops.</label></li>
+      <li><input type="checkbox" id="c1-2"><label for="c1-2">Type <code>jk</code> and <code>kj</code> rapidly five times each. <b>No screenshot tool should pop up.</b></label></li>
+      <li><input type="checkbox" id="c1-3"><label for="c1-3">Type <code>xc</code> and <code>cx</code> rapidly five times each. <b>Mouse layer should NOT toggle.</b></label></li>
+    </ul>
+    <div class="fail"><b>If misfires:</b> tighten <code>combo_screenshot</code> / <code>combo_mouse</code> <code>timeout-ms</code>.</div>
+  </section>
+
+  <section class="step" data-step="2">
+    <h2><span class="num">2</span>Existing combos still work</h2>
+    <div class="desc">Make sure nothing already in your muscle memory regressed.</div>
+    <ul class="checks">
+      <li><input type="checkbox" id="c2-1"><label for="c2-1"><kbd>D</kbd>+<kbd>F</kbd> simultaneously fires <kbd>Alt</kbd>+<kbd>Space</kbd>.</label></li>
+      <li><input type="checkbox" id="c2-2"><label for="c2-2">Both left thumbs simultaneously enter the SETTINGS layer.</label></li>
+    </ul>
+  </section>
+
+  <section class="step" data-step="3">
+    <h2><span class="num">3</span>BLE snappiness — the backspace fix</h2>
+    <div class="desc">Verify the wireless tuning landed.</div>
+    <ul class="checks">
+      <li><input type="checkbox" id="c3-1"><label for="c3-1">Hold left-outer thumb (EXT), mash <kbd>BSPC</kbd> position 20 times. No drops.</label></li>
+      <li><input type="checkbox" id="c3-2"><label for="c3-2">From SYM, mash any rapid-repeat key 20 times. No drops.</label></li>
+      <li><input type="checkbox" id="c3-3"><label for="c3-3">Walk 3 metres from the host and repeat both. Still solid.</label></li>
+    </ul>
+    <div class="fail"><b>If still missing keys:</b> likely a layer-release race — flag it and we'll add a base-layer backspace combo.</div>
+  </section>
+
+  <section class="step" data-step="4">
+    <h2><span class="num">4</span>Screenshot — J+K combo</h2>
+    <ul class="checks">
+      <li><input type="checkbox" id="c4-1"><label for="c4-1"><kbd>J</kbd>+<kbd>K</kbd> opens the Snipping Tool selection overlay.</label></li>
+      <li><input type="checkbox" id="c4-2"><label for="c4-2">Cancel with <kbd>Esc</kbd>.</label></li>
+      <li><input type="checkbox" id="c4-3"><label for="c4-3">Repeat 3 more times — fires reliably.</label></li>
+    </ul>
+  </section>
+
+  <section class="step" data-step="5">
+    <h2><span class="num">5</span>Window snap — WIN layer</h2>
+    <div class="desc">Open a window on the ultrawide first.</div>
+    <ul class="checks">
+      <li><input type="checkbox" id="c5-1"><label for="c5-1">Hold left-outer thumb, squeeze <kbd>S</kbd>+<kbd>D</kbd>, press <kbd>←</kbd> → snaps to UW left zone.</label></li>
+      <li><input type="checkbox" id="c5-2"><label for="c5-2">Same gesture + <kbd>→</kbd> → snaps to UW right zone.</label></li>
+      <li><input type="checkbox" id="c5-3"><label for="c5-3">Same gesture + <kbd>↑</kbd> → maximizes on the ultrawide.</label></li>
+      <li><input type="checkbox" id="c5-4"><label for="c5-4">Same gesture + <kbd>↓</kbd> → moves to thinkvision and fills it.</label></li>
+      <li><input type="checkbox" id="c5-5"><label for="c5-5">From thinkvision, same gesture + <kbd>↓</kbd> → cycles back to UW left.</label></li>
+    </ul>
+    <div class="fail"><b>If <kbd>↓</kbd> doesn't reach the thinkvision:</b> Windows monitor adjacency may want <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd> instead. Check <i>Display Settings</i>.</div>
+  </section>
+
+  <section class="step" data-step="6">
+    <h2><span class="num">6</span>Mouse layer</h2>
+    <ul class="checks">
+      <li><input type="checkbox" id="c6-1"><label for="c6-1"><kbd>X</kbd>+<kbd>C</kbd> tap → mouse mode toggles on.</label></li>
+      <li><input type="checkbox" id="c6-2"><label for="c6-2">Hold <kbd>J</kbd> → cursor moves left, accelerates after ~0.3 s.</label></li>
+      <li><input type="checkbox" id="c6-3"><label for="c6-3"><kbd>I</kbd>=up, <kbd>K</kbd>=down, <kbd>L</kbd>=right all work.</label></li>
+      <li><input type="checkbox" id="c6-4"><label for="c6-4">Right inner thumb = left click. Test on a link or button.</label></li>
+      <li><input type="checkbox" id="c6-5"><label for="c6-5">Right outer thumb = right click. Context menu appears.</label></li>
+      <li><input type="checkbox" id="c6-6"><label for="c6-6">Hold <kbd>H</kbd> → page scrolls up. <kbd>N</kbd> → scrolls down.</label></li>
+      <li><input type="checkbox" id="c6-7"><label for="c6-7"><kbd>X</kbd>+<kbd>C</kbd> again → mouse mode off, normal typing resumes.</label></li>
+    </ul>
+    <div class="fail"><b>If acceleration feels off:</b> we can tune <code>&amp;mmv</code> defaults via a behavior config block.</div>
+  </section>
+
+  <section class="step" data-step="7">
+    <h2><span class="num">7</span>No regressions — FNC layer</h2>
+    <ul class="checks">
+      <li><input type="checkbox" id="c7-1"><label for="c7-1">Hold both outer thumbs (EXT + FNC), press position 17 (<kbd>K</kbd>) → <kbd>PrintScreen</kbd> fires.</label></li>
+      <li><input type="checkbox" id="c7-2"><label for="c7-2"><kbd>F1</kbd>–<kbd>F12</kbd> all fire from FNC.</label></li>
+    </ul>
+  </section>
+
+  <section class="step" data-step="8">
+    <h2><span class="num">8</span>Settings layer</h2>
+    <ul class="checks">
+      <li><input type="checkbox" id="c8-1"><label for="c8-1">Both left thumbs → SETTINGS layer.</label></li>
+      <li><input type="checkbox" id="c8-2"><label for="c8-2">Bluetooth profile switching works (<kbd>BT_SEL 0..5</kbd>).</label></li>
+      <li><input type="checkbox" id="c8-3"><label for="c8-3"><code>unstick</code> macro recovers from a stuck modifier (try forcing one stuck first).</label></li>
+    </ul>
+  </section>
+
+  <footer>
+    <strong>Rollback:</strong> if anything is fundamentally broken, revert with
+    <code>git revert ed5b2fe 65c6fc1 6ecd1d9 f3b4a5c</code>
+    and re-flash from a previous successful Actions build.
+    Progress is saved in your browser's localStorage.
+  </footer>
+
+</div>
+
+<script>
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const KEY = 'urchin-test-progress-v1';
+
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY) || '{}');
+      checkboxes.forEach(cb => { if (s[cb.id]) cb.checked = true; });
+    } catch (e) {}
+    update();
+  }
+  function save() {
+    const s = {};
+    checkboxes.forEach(cb => { if (cb.checked) s[cb.id] = 1; });
+    localStorage.setItem(KEY, JSON.stringify(s));
+  }
+  function update() {
+    const total = checkboxes.length;
+    let done = 0;
+    checkboxes.forEach(cb => {
+      cb.parentElement.classList.toggle('checked', cb.checked);
+      if (cb.checked) done++;
+    });
+    document.querySelectorAll('section.step').forEach(sec => {
+      const items = sec.querySelectorAll('input[type="checkbox"]');
+      const allDone = Array.from(items).every(c => c.checked) && items.length > 0;
+      sec.classList.toggle('done', allDone);
+    });
+    document.getElementById('progressText').textContent = `${done} / ${total} checks`;
+    document.getElementById('progressFill').style.width = `${(done / total) * 100}%`;
+  }
+  function resetAll() {
+    if (!confirm('Reset all checks?')) return;
+    checkboxes.forEach(cb => cb.checked = false);
+    save(); update();
+  }
+  checkboxes.forEach(cb => cb.addEventListener('change', () => { save(); update(); }));
+  load();
+</script>
+</body>
+</html>
