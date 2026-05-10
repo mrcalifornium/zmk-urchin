@@ -34,19 +34,22 @@ Combos active here:
 - **D+F** → `Alt+Space`
 - **J+K** → `Win+Shift+S` (Snipping Tool screenshot)
 - **X+C** → toggle MOUSE layer
+- **F+J** → sticky Hyper (`Ctrl+Alt+Win+Shift`); next letter is caught by AHK to launch / focus an app
 
 ---
 
-## SYM — symbols + numbers
+## SYM — symbols + numbers (Miryoku-style)
 
 ```
- !   @   #   $   %   │   ^   &   *   (   )
+ ~   <   >   "   '   │   |   +   [   ]   =
  1   2   3   4   5   │   6   7   8   9   0
- `   "   +   [   ]   │   _   \   -   =   '
+ `   ^   &   *   \   │   /   -   (   )   _
         FNC LSHIFT   │   _   _
 ```
 
-Tip: `⇧+1..0` on row 2 also gives you the row-1 shifted symbols, since left-thumb shift is available.
+Right-hand columns: `[ 8 (` and `] 9 )` line up so opens-on-top, closes-on-bottom. Index = math (`+ 7 -`), pinky = `= 0 _`.
+
+`! @ # $ %` and `^ & * ( )` accessible via shift+number on this layer (left thumb is LSHIFT). `{ }` via shift+`[`/`]`. `?` via shift+`/`.
 
 ---
 
@@ -141,6 +144,7 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 | **Maximize window** | hold LO, squeeze `S+D`, press `↑` |
 | **Send window to thinkvision** | hold LO, squeeze `S+D`, press `↓` |
 | **Mouse mode on/off** | tap `X+C` (BASE) |
+| **Launch app (Hyper)** | tap `F+J`, then a letter (B/E/F/T/C/W/X by default) |
 | **`Alt+Space`** (FZ cycle) | `D+F` (BASE) |
 | **Recover from stuck modifier** | both left thumbs → SETTINGS, press position 7 |
 | **Switch BT profile** | both left thumbs → SETTINGS, `BT0..BT5` keys |

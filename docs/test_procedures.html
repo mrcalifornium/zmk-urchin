@@ -276,8 +276,22 @@
     <div class="fail"><b>If acceleration feels off:</b> we can tune <code>&amp;mmv</code> defaults via a behavior config block.</div>
   </section>
 
+  <section class="step" data-step="7a">
+    <h2><span class="num">7</span>App launcher — Hyper combo + AHK</h2>
+    <div class="desc">Requires <code>tools/urchin-apps.ahk</code> running. Launch it via <code>shell:startup</code> if not already in place.</div>
+    <ul class="checks">
+      <li><input type="checkbox" id="c7a-1"><label for="c7a-1"><kbd>F</kbd>+<kbd>J</kbd> tap (both index fingers, home row) — no visual feedback expected; sticky Hyper is now armed for one keystroke.</label></li>
+      <li><input type="checkbox" id="c7a-2"><label for="c7a-2"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>B</kbd> → browser opens or focuses.</label></li>
+      <li><input type="checkbox" id="c7a-3"><label for="c7a-3"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>E</kbd> → Outlook opens or focuses.</label></li>
+      <li><input type="checkbox" id="c7a-4"><label for="c7a-4"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>F</kbd> → File Explorer opens.</label></li>
+      <li><input type="checkbox" id="c7a-5"><label for="c7a-5">Type <code>fjords fjord</code> normally — no app launches (combo timeout rejects sequential presses).</label></li>
+      <li><input type="checkbox" id="c7a-6"><label for="c7a-6"><kbd>F</kbd>+<kbd>J</kbd> then wait 2 seconds then any letter — sticky expired, letter types normally.</label></li>
+    </ul>
+    <div class="fail"><b>If nothing launches:</b> AHK script not running. Check tray for AutoHotkey icon. <b>If wrong app:</b> edit the path in the .ahk file and reload.</div>
+  </section>
+
   <section class="step" data-step="7">
-    <h2><span class="num">7</span>No regressions — FNC layer</h2>
+    <h2><span class="num">8</span>No regressions — FNC layer</h2>
     <ul class="checks">
       <li><input type="checkbox" id="c7-1"><label for="c7-1">Hold both outer thumbs (EXT + FNC), press position 17 (<kbd>K</kbd>) → <kbd>PrintScreen</kbd> fires.</label></li>
       <li><input type="checkbox" id="c7-2"><label for="c7-2"><kbd>F1</kbd>–<kbd>F12</kbd> all fire from FNC.</label></li>
@@ -285,7 +299,7 @@
   </section>
 
   <section class="step" data-step="8">
-    <h2><span class="num">8</span>Settings layer</h2>
+    <h2><span class="num">9</span>Settings layer</h2>
     <ul class="checks">
       <li><input type="checkbox" id="c8-1"><label for="c8-1">Both left thumbs → SETTINGS layer.</label></li>
       <li><input type="checkbox" id="c8-2"><label for="c8-2">Bluetooth profile switching works (<kbd>BT_SEL 0..5</kbd>).</label></li>

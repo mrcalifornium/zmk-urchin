@@ -37,6 +37,7 @@ Added window-snap, mouse, and one-hand screenshot capabilities. Tuned wireless r
 | `combo_screenshot` | `J`+`K` (16+17), 35 ms | BASE | `Win+Shift+S` (Snipping Tool) |
 | `combo_win` | `S`+`D` (11+12), 200 ms | EXT | `&mo WIN` |
 | `combo_mouse` | `X`+`C` (21+22), 50 ms | BASE, MOUSE | `&tog MOUSE` (toggle on/off) |
+| `combo_hyper` | `F`+`J` (13+16), 40 ms | BASE | sticky Hyper (`Ctrl+Alt+Win+Shift`) — paired with AHK |
 
 ### New layers
 
@@ -64,9 +65,28 @@ Added window-snap, mouse, and one-hand screenshot capabilities. Tuned wireless r
 | right inner thumb | left click |
 | right outer thumb | right click |
 
+## SYM layer — Miryoku-style rework
+
+Right-hand columns now have brackets paired vertically:
+
+| Finger | Top | Number | Bottom |
+|---|---|---|---|
+| index   | `+` | 7 | `-` |
+| middle  | `[` | 8 | `(` |
+| ring    | `]` | 9 | `)` |
+| pinky   | `=` | 0 | `_` |
+
+Left hand: `~ < > " '` on top, `` ` ^ & * \ `` on bottom.
+
+`! @ # $ %` are no longer dedicated — `Shift+1..5` on the same layer (LSHIFT is on left inner thumb of SYM). Same for `^ & * ( )` via `Shift+6..0`. `{ }` via `Shift+[/]`. `?` via `Shift+/`.
+
+## App launcher (Hyper + AHK)
+
+- `F+J` combo on base fires sticky Hyper (`Ctrl+Alt+Win+Shift`).
+- [tools/urchin-apps.ahk](../tools/urchin-apps.ahk) catches Hyper+letter on the host and focuses-or-launches apps. Drop into `shell:startup` and edit per machine.
+
 ## What did NOT change
 
-- Base, SYM, EXT, FNC, and SETTINGS layers are untouched.
+- Base, EXT, FNC, and SETTINGS layers are untouched.
 - Existing behaviors (`qt`, `unstick`) are untouched.
 - Existing combos (`combo_settings`, `combo_alt_space`) are untouched.
-- The "more intuitive symbols" rework was discussed and parked — design proposal lives in chat history, not in code.
