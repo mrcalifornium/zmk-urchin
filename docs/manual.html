@@ -6,40 +6,31 @@
 <title>Urchin — One-Page Manual</title>
 <style>
   :root {
-    --bg: #0f1115;
-    --panel: #171a21;
-    --panel-2: #1f2330;
-    --border: #2a2f3d;
-    --text: #e7e9ee;
-    --muted: #98a0ad;
-    --accent: #7c9cff;
+    --bg: #ffffff;
+    --panel: #ffffff;
+    --panel-2: #f7f8fa;
+    --border: #d0d4dc;
+    --border-soft: #e3e6ec;
+    --text: #1a1d23;
+    --muted: #6a7280;
+    --accent: #3056d3;
+    --key-bg: #fafbfc;
+    --key-border: #c8cdd6;
+    --key-text: #1a1d23;
+    --behavior-text: #a7adb8;
+
     --base: #4a90e2;
-    --sym:  #e07b39;
-    --ext:  #5fbb71;
-    --fnc:  #b675c8;
-    --set:  #c9a13a;
-    --win:  #e25c8b;
-    --mou:  #2bb8a7;
-    --kbd-bg: #2a2f3d;
-    --kbd-border: #3a4151;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f6f7f9;
-      --panel: #ffffff;
-      --panel-2: #f0f2f6;
-      --border: #d8dde5;
-      --text: #1a1d23;
-      --muted: #5a6470;
-      --accent: #3056d3;
-      --kbd-bg: #ebeef3;
-      --kbd-border: #c2cad6;
-    }
+    --sym:  #d97706;
+    --ext:  #16a34a;
+    --fnc:  #9333ea;
+    --set:  #ca8a04;
+    --win:  #db2777;
+    --mou:  #0d9488;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    background: #f4f5f7;
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
     padding: 14px;
@@ -47,410 +38,458 @@
   .page {
     max-width: 1040px;
     margin: 0 auto;
-    background: var(--panel);
+    background: white;
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 22px;
+    border-radius: 10px;
+    padding: 16px 20px;
   }
   header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 8px;
-    margin-bottom: 12px;
+    border-bottom: 1.5px solid var(--border);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
   }
-  h1 {
-    font-size: 22px;
-    margin: 0;
-    letter-spacing: -0.02em;
-  }
-  .tag {
-    color: var(--muted);
-    font-size: 12px;
-  }
+  h1 { font-size: 20px; margin: 0; letter-spacing: -0.02em; }
+  .tag { color: var(--muted); font-size: 11px; }
   h2 {
-    font-size: 12px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--muted);
     margin: 0 0 6px;
     font-weight: 600;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .full { grid-column: 1 / -1; }
-  .card {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-  }
-  .card.span2 { grid-column: span 2; }
 
   /* Layer block */
-  .layer-row { display: flex; align-items: stretch; gap: 8px; margin-bottom: 6px; }
-  .layer-tag {
-    width: 56px;
-    flex: 0 0 56px;
-    font-size: 11px;
-    font-weight: 700;
+  .layer {
+    margin-bottom: 6px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .layer-label {
+    background: var(--accent);
     color: white;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .lt-base { background: var(--base); }
-  .lt-sym  { background: var(--sym); }
-  .lt-ext  { background: var(--ext); }
-  .lt-fnc  { background: var(--fnc); }
-  .lt-set  { background: var(--set); }
-  .lt-win  { background: var(--win); }
-  .lt-mou  { background: var(--mou); }
-
-  .kbgrid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(11, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 24px);
-    gap: 3px;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 11px;
-  }
-  .kbgrid .k {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .kbgrid .k.gap { background: transparent; border: none; }
-  .kbgrid .k.t { color: var(--muted); opacity: 0.4; }
-  .kbgrid .k.hi { font-weight: 700; }
-  .kbgrid .k.lt-base { background: var(--base); color: white; border-color: var(--base); }
-  .kbgrid .k.lt-sym  { background: var(--sym);  color: white; border-color: var(--sym); }
-  .kbgrid .k.lt-ext  { background: var(--ext);  color: white; border-color: var(--ext); }
-  .kbgrid .k.lt-fnc  { background: var(--fnc);  color: white; border-color: var(--fnc); }
-  .kbgrid .k.lt-set  { background: var(--set);  color: white; border-color: var(--set); }
-  .kbgrid .k.lt-win  { background: var(--win);  color: white; border-color: var(--win); }
-  .kbgrid .k.lt-mou  { background: var(--mou);  color: white; border-color: var(--mou); }
-
-  .thumbs {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(11, minmax(0, 1fr));
-    gap: 3px;
-    margin-top: 3px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-  th, td {
-    text-align: left;
+    border-radius: 5px;
     padding: 4px 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  th {
-    color: var(--muted);
-    text-transform: uppercase;
+    font-weight: 700;
     font-size: 10px;
     letter-spacing: 0.05em;
-    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.2;
   }
-  td:first-child { white-space: nowrap; }
+  .layer-label .how {
+    display: block;
+    font-size: 8px;
+    font-weight: 500;
+    opacity: 0.92;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+  .ll-base { background: var(--base); }
+  .ll-sym  { background: var(--sym); }
+  .ll-ext  { background: var(--ext); }
+  .ll-fnc  { background: var(--fnc); }
+  .ll-set  { background: var(--set); }
+  .ll-win  { background: var(--win); }
+  .ll-mou  { background: var(--mou); }
+
+  /* Keyboard layout */
+  .kb {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 4px 0;
+  }
+  .half { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .rows { display: flex; gap: 2px; align-items: flex-start; }
+  .col { display: flex; flex-direction: column; gap: 2px; }
+  /* Column stagger — urchin physical offsets */
+  .left .c0 { padding-top: 12px; }
+  .left .c1 { padding-top: 6px; }
+  .left .c2 { padding-top: 0px; }
+  .left .c3 { padding-top: 4px; }
+  .left .c4 { padding-top: 10px; }
+  .right .c0 { padding-top: 10px; }
+  .right .c1 { padding-top: 4px; }
+  .right .c2 { padding-top: 0px; }
+  .right .c3 { padding-top: 6px; }
+  .right .c4 { padding-top: 12px; }
+
+  .thumbs {
+    display: flex;
+    gap: 2px;
+    margin-top: -2px;
+  }
+  .thumbs.left { padding-left: 70px; }
+  .thumbs.right { padding-right: 70px; }
+
+  .key {
+    width: 30px;
+    height: 26px;
+    border: 1px solid var(--key-border);
+    border-radius: 4px;
+    background: var(--key-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 1px 2px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .key .b {
+    font-size: 6px;
+    color: var(--behavior-text);
+    line-height: 1;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    text-align: left;
+  }
+  .key .l {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--key-text);
+    line-height: 1;
+    margin-top: -2px;
+  }
+  .key .l.small { font-size: 8px; font-weight: 600; }
+  .key .l.tiny { font-size: 7px; font-weight: 600; }
+  .key.t { background: white; border-color: var(--border-soft); }
+  .key.t .l { color: #c0c5d0; }
+  .key.hl-base { box-shadow: inset 0 0 0 2px var(--base); }
+  .key.hl-sym  { box-shadow: inset 0 0 0 2px var(--sym); }
+  .key.hl-ext  { box-shadow: inset 0 0 0 2px var(--ext); }
+  .key.hl-fnc  { box-shadow: inset 0 0 0 2px var(--fnc); }
+  .key.hl-win  { box-shadow: inset 0 0 0 2px var(--win); }
+  .key.hl-mou  { box-shadow: inset 0 0 0 2px var(--mou); }
+
+  /* Cheat sheet section */
+  .lower {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .card {
+    background: var(--panel-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th, td { text-align: left; padding: 3px 4px; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
+  th { color: var(--muted); text-transform: uppercase; font-size: 9px; letter-spacing: 0.05em; font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { white-space: nowrap; color: var(--muted); }
   kbd {
-    background: var(--kbd-bg);
-    border: 1px solid var(--kbd-border);
+    background: #eef0f4;
+    border: 1px solid #c8cdd6;
     border-bottom-width: 2px;
     border-radius: 3px;
-    padding: 0px 5px;
+    padding: 0px 4px;
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 11px;
+    font-size: 10px;
     color: var(--text);
   }
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 11px;
-  }
-  .legend span {
-    padding: 2px 8px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 600;
-  }
-
   footer {
     margin-top: 10px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
+    padding-top: 6px;
+    border-top: 1px solid var(--border-soft);
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
     display: flex;
     justify-content: space-between;
   }
 
-  @page { size: A4; margin: 8mm; }
+  @page { size: A4; margin: 7mm; }
   @media print {
     body { background: white; padding: 0; }
-    .page { border: none; padding: 0; max-width: none; }
-    .card { background: #fafafa; border: 1px solid #ddd; }
-    .kbgrid .k { background: white; }
+    .page { border: none; padding: 0; max-width: none; box-shadow: none; }
+    .key { box-shadow: none; }
+    .key.hl-base, .key.hl-sym, .key.hl-ext, .key.hl-fnc, .key.hl-win, .key.hl-mou {
+      box-shadow: inset 0 0 0 1.5px currentColor;
+    }
+    .key.hl-base { color: var(--base); }
+    .key.hl-sym  { color: var(--sym); }
+    .key.hl-ext  { color: var(--ext); }
+    .key.hl-fnc  { color: var(--fnc); }
+    .key.hl-win  { color: var(--win); }
+    .key.hl-mou  { color: var(--mou); }
+    .key .b, .key .l { color: var(--key-text); }
+    .key.t .l { color: #c0c5d0; }
   }
 </style>
 </head>
 <body>
 <div class="page">
-
   <header>
     <h1>Urchin · one-page manual</h1>
     <div class="tag">36-key split · ZMK · BLE</div>
   </header>
 
-  <div class="legend" style="margin-bottom: 10px;">
-    <span style="background: var(--base);">BASE</span>
-    <span style="background: var(--sym);">SYM</span>
-    <span style="background: var(--ext);">EXT</span>
-    <span style="background: var(--fnc);">FNC</span>
-    <span style="background: var(--set);">SETTINGS</span>
-    <span style="background: var(--win);">WIN</span>
-    <span style="background: var(--mou);">MOUSE</span>
-  </div>
-
-  <div class="grid">
-
-    <!-- Layer maps -->
-    <div class="card full">
-      <h2>Layers</h2>
-
-      <!-- BASE -->
-      <div class="layer-row">
-        <div class="layer-tag lt-base">BASE</div>
-        <div class="kbgrid">
-          <div class="k">Q</div><div class="k">W</div><div class="k">E</div><div class="k">R</div><div class="k">T</div>
-          <div class="k gap"></div>
-          <div class="k">Y</div><div class="k">U</div><div class="k">I</div><div class="k">O</div><div class="k">P</div>
-
-          <div class="k">A</div><div class="k">S</div><div class="k">D</div><div class="k">F</div><div class="k">G</div>
-          <div class="k gap"></div>
-          <div class="k">H</div><div class="k">J</div><div class="k">K</div><div class="k">L</div><div class="k">;</div>
-
-          <div class="k">Z</div><div class="k">X</div><div class="k">C</div><div class="k">V</div><div class="k">B</div>
-          <div class="k gap"></div>
-          <div class="k">N</div><div class="k">M</div><div class="k">,</div><div class="k">.</div><div class="k">/</div>
-
-          <div class="thumbs">
-            <div class="k gap"></div><div class="k gap"></div>
-            <div class="k lt-ext">EXT</div><div class="k">⇧/SPC</div>
-            <div class="k gap"></div><div class="k gap"></div><div class="k gap"></div>
-            <div class="k">SPC</div><div class="k lt-sym">SYM↗</div>
-            <div class="k gap"></div><div class="k gap"></div>
-          </div>
+  <!-- BASE -->
+  <div class="layer">
+    <div class="layer-label ll-base">Base<span class="how">always-on</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l">Q</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">A</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">Z</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l">W</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">S</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">X</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l">E</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">D</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">C</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l">R</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">F</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">V</div></div></div>
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l">T</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">G</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">B</div></div></div>
+        </div>
+        <div class="thumbs left">
+          <div class="key hl-ext"><div class="b">&amp;mo</div><div class="l">EXT</div></div>
+          <div class="key"><div class="b">&amp;qt</div><div class="l small">⇧/SP</div></div>
         </div>
       </div>
-
-      <!-- SYM -->
-      <div class="layer-row">
-        <div class="layer-tag lt-sym">SYM</div>
-        <div class="kbgrid">
-          <div class="k">!</div><div class="k">@</div><div class="k">#</div><div class="k">$</div><div class="k">%</div>
-          <div class="k gap"></div>
-          <div class="k">^</div><div class="k">&amp;</div><div class="k">*</div><div class="k">(</div><div class="k">)</div>
-
-          <div class="k">1</div><div class="k">2</div><div class="k">3</div><div class="k">4</div><div class="k">5</div>
-          <div class="k gap"></div>
-          <div class="k">6</div><div class="k">7</div><div class="k">8</div><div class="k">9</div><div class="k">0</div>
-
-          <div class="k">`</div><div class="k">"</div><div class="k">+</div><div class="k">[</div><div class="k">]</div>
-          <div class="k gap"></div>
-          <div class="k t">_</div><div class="k">\</div><div class="k">−</div><div class="k">=</div><div class="k">'</div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l">Y</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">H</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">N</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l">U</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">J</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">M</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l">I</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">K</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">,</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l">O</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">L</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">.</div></div></div>
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l">P</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">;</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">/</div></div></div>
         </div>
-      </div>
-
-      <!-- EXT -->
-      <div class="layer-row">
-        <div class="layer-tag lt-ext">EXT</div>
-        <div class="kbgrid">
-          <div class="k">ESC</div><div class="k">⏮</div><div class="k">⏯</div><div class="k">⏭</div><div class="k">⏸</div>
-          <div class="k gap"></div>
-          <div class="k">PgU</div><div class="k">Hm</div><div class="k">↑</div><div class="k">End</div><div class="k">Cap</div>
-
-          <div class="k">sLA</div><div class="k">sLG</div><div class="k">sLS</div><div class="k">sLC</div><div class="k">HYP</div>
-          <div class="k gap"></div>
-          <div class="k">PgD</div><div class="k">←</div><div class="k">↓</div><div class="k">→</div><div class="k">Del</div>
-
-          <div class="k">^Z</div><div class="k">^X</div><div class="k">^C</div><div class="k">Tab</div><div class="k">^V</div>
-          <div class="k gap"></div>
-          <div class="k">^Bk</div><div class="k">Bk</div><div class="k">⊞SP</div><div class="k t">.</div><div class="k t">/</div>
-        </div>
-      </div>
-
-      <!-- FNC -->
-      <div class="layer-row">
-        <div class="layer-tag lt-fnc">FNC</div>
-        <div class="kbgrid">
-          <div class="k">F1</div><div class="k">F2</div><div class="k">F3</div><div class="k">F4</div><div class="k">F5</div>
-          <div class="k gap"></div>
-          <div class="k">F6</div><div class="k">F7</div><div class="k">F8</div><div class="k">F9</div><div class="k">F10</div>
-
-          <div class="k">sLA</div><div class="k">sLG</div><div class="k">sLS</div><div class="k">sLC</div><div class="k">RA</div>
-          <div class="k gap"></div>
-          <div class="k">F11</div><div class="k">F12</div><div class="k hi">PrSc</div><div class="k t">·</div><div class="k t">·</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-        </div>
-      </div>
-
-      <!-- SETTINGS -->
-      <div class="layer-row">
-        <div class="layer-tag lt-set">SET</div>
-        <div class="kbgrid">
-          <div class="k hi">BOOT</div><div class="k t">·</div><div class="k t">·</div><div class="k">BTclr</div><div class="k">BT0</div>
-          <div class="k gap"></div>
-          <div class="k">BT3</div><div class="k t">·</div><div class="k">unstick</div><div class="k t">·</div><div class="k hi">BOOT</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k">BT1</div>
-          <div class="k gap"></div>
-          <div class="k">BT4</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k">BT2</div>
-          <div class="k gap"></div>
-          <div class="k">BT5</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-        </div>
-      </div>
-
-      <!-- WIN -->
-      <div class="layer-row">
-        <div class="layer-tag lt-win">WIN</div>
-        <div class="kbgrid">
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k t">·</div><div class="k t">·</div><div class="k hi">↑max</div><div class="k t">·</div><div class="k t">·</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k t">·</div><div class="k hi">←UWl</div><div class="k hi">↓TV</div><div class="k hi">→UWr</div><div class="k t">·</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-        </div>
-      </div>
-
-      <!-- MOUSE -->
-      <div class="layer-row">
-        <div class="layer-tag lt-mou">MOUSE</div>
-        <div class="kbgrid">
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k">scrl↑</div><div class="k t">·</div><div class="k hi">↑</div><div class="k t">·</div><div class="k t">·</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k">scrl↓</div><div class="k hi">←</div><div class="k hi">↓</div><div class="k hi">→</div><div class="k t">·</div>
-
-          <div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-          <div class="k gap"></div>
-          <div class="k">scrl←</div><div class="k">scrl→</div><div class="k t">·</div><div class="k t">·</div><div class="k t">·</div>
-
-          <div class="thumbs">
-            <div class="k gap"></div><div class="k gap"></div>
-            <div class="k t">·</div><div class="k t">·</div>
-            <div class="k gap"></div><div class="k gap"></div><div class="k gap"></div>
-            <div class="k hi">L-clk</div><div class="k hi">R-clk</div>
-            <div class="k gap"></div><div class="k gap"></div>
-          </div>
+        <div class="thumbs right">
+          <div class="key"><div class="b">&amp;kp</div><div class="l">SPC</div></div>
+          <div class="key hl-sym"><div class="b">&amp;sl</div><div class="l">SYM</div></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Layer entry -->
+  <!-- SYM -->
+  <div class="layer">
+    <div class="layer-label ll-sym">Sym<span class="how">tap right outer thumb</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l">!</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">1</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">`</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l">@</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">2</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">"</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l">#</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">3</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">+</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l">$</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">4</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">[</div></div></div>
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l">%</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">5</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">]</div></div></div>
+        </div>
+        <div class="thumbs left">
+          <div class="key hl-fnc"><div class="b">&amp;mo</div><div class="l">FNC</div></div>
+          <div class="key"><div class="b">&amp;kp</div><div class="l small">L⇧</div></div>
+        </div>
+      </div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l">^</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">6</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l">&amp;</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">7</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">\</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l">*</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">8</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">−</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l">(</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">9</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">=</div></div></div>
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l">)</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">0</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">'</div></div></div>
+        </div>
+        <div class="thumbs right">
+          <div class="key t"><div class="l">·</div></div>
+          <div class="key t"><div class="l">·</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXT -->
+  <div class="layer">
+    <div class="layer-label ll-ext">Ext<span class="how">hold left outer thumb</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l small">ESC</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">LAlt</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">^Z</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l small">⏮</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">LGui</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">^X</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l small">⏯</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">L⇧</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">^C</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l small">⏭</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">LCtl</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">Tab</div></div></div>
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l small">⏸</div></div><div class="key"><div class="b">&amp;sk</div><div class="l tiny">HYPR</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">^V</div></div></div>
+        </div>
+        <div class="thumbs left">
+          <div class="key t"><div class="l">·</div></div>
+          <div class="key"><div class="b">&amp;kp</div><div class="l small">LCtl</div></div>
+        </div>
+      </div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l small">PgU</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">PgD</div></div><div class="key"><div class="b">&amp;kp</div><div class="l tiny">^Bsp</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l small">Hm</div></div><div class="key hl-win"><div class="b">&amp;kp</div><div class="l">←</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">Bsp</div></div></div>
+          <div class="col c2"><div class="key hl-win"><div class="b">&amp;kp</div><div class="l">↑</div></div><div class="key hl-win"><div class="b">&amp;kp</div><div class="l">↓</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">⊞SP</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l small">End</div></div><div class="key hl-win"><div class="b">&amp;kp</div><div class="l">→</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l small">Cap</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">Del</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs right">
+          <div class="key"><div class="b">&amp;kp</div><div class="l small">ENT</div></div>
+          <div class="key hl-fnc"><div class="b">&amp;mo</div><div class="l">FNC</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FNC -->
+  <div class="layer">
+    <div class="layer-label ll-fnc">Fnc<span class="how">hold both outer thumbs</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l">F1</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">LAlt</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l">F2</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">LGui</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l">F3</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">L⇧</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l">F4</div></div><div class="key"><div class="b">&amp;sk</div><div class="l small">LCtl</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l">F5</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">RAlt</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs left">
+          <div class="key t"><div class="l">·</div></div>
+          <div class="key t"><div class="l">·</div></div>
+        </div>
+      </div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key"><div class="b">&amp;kp</div><div class="l">F6</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">F11</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key"><div class="b">&amp;kp</div><div class="l">F7</div></div><div class="key"><div class="b">&amp;kp</div><div class="l">F12</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key"><div class="b">&amp;kp</div><div class="l">F8</div></div><div class="key"><div class="b">&amp;kp</div><div class="l small">PrSc</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key"><div class="b">&amp;kp</div><div class="l">F9</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c0"><div class="key"><div class="b">&amp;kp</div><div class="l">F10</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs right">
+          <div class="key t"><div class="l">·</div></div>
+          <div class="key t"><div class="l">·</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIN -->
+  <div class="layer">
+    <div class="layer-label ll-win">Win<span class="how">EXT held + S+D combo</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs left"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+      </div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="l small">UW←</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key hl-win"><div class="l small">MAX</div></div><div class="key hl-win"><div class="l small">→TV</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="l small">UW→</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs right"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOUSE -->
+  <div class="layer">
+    <div class="layer-label ll-mou">Mouse<span class="how">tap X+C combo</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs left"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+      </div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key hl-mou"><div class="b">&amp;msc</div><div class="l small">scr↑</div></div><div class="key hl-mou"><div class="b">&amp;msc</div><div class="l small">scr↓</div></div><div class="key hl-mou"><div class="b">&amp;msc</div><div class="l small">scr←</div></div></div>
+          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key hl-mou"><div class="b">&amp;mmv</div><div class="l">←</div></div><div class="key hl-mou"><div class="b">&amp;msc</div><div class="l small">scr→</div></div></div>
+          <div class="col c2"><div class="key hl-mou"><div class="b">&amp;mmv</div><div class="l">↑</div></div><div class="key hl-mou"><div class="b">&amp;mmv</div><div class="l">↓</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key hl-mou"><div class="b">&amp;mmv</div><div class="l">→</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs right">
+          <div class="key hl-mou"><div class="b">&amp;mkp</div><div class="l small">L-CK</div></div>
+          <div class="key hl-mou"><div class="b">&amp;mkp</div><div class="l small">R-CK</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="layer">
+    <div class="layer-label ll-set">Set<span class="how">both left thumbs</span></div>
+    <div class="kb">
+      <div class="half left">
+        <div class="rows">
+          <div class="col c0"><div class="key"><div class="l small">BOOT</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key"><div class="l small">BTclr</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key"><div class="b">&amp;bt</div><div class="l small">BT0</div></div><div class="key"><div class="b">&amp;bt</div><div class="l small">BT1</div></div><div class="key"><div class="b">&amp;bt</div><div class="l small">BT2</div></div></div>
+        </div>
+        <div class="thumbs left"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+      </div>
+      <div class="half right">
+        <div class="rows">
+          <div class="col c4"><div class="key"><div class="b">&amp;bt</div><div class="l small">BT3</div></div><div class="key"><div class="b">&amp;bt</div><div class="l small">BT4</div></div><div class="key"><div class="b">&amp;bt</div><div class="l small">BT5</div></div></div>
+          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c2"><div class="key"><div class="l small">unstk</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c0"><div class="key"><div class="l small">BOOT</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+        </div>
+        <div class="thumbs right"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lower">
     <div class="card">
       <h2>Layer entry</h2>
       <table>
-        <tr><th>Layer</th><th>Trigger</th></tr>
-        <tr><td><span class="legend"><span style="background: var(--sym);">SYM</span></span></td><td>tap right-outer thumb (sticky one key)</td></tr>
-        <tr><td><span class="legend"><span style="background: var(--ext);">EXT</span></span></td><td>hold left-outer thumb</td></tr>
-        <tr><td><span class="legend"><span style="background: var(--fnc);">FNC</span></span></td><td>hold both outer thumbs</td></tr>
-        <tr><td><span class="legend"><span style="background: var(--set);">SETTINGS</span></span></td><td>combo both left thumbs</td></tr>
-        <tr><td><span class="legend"><span style="background: var(--win);">WIN</span></span></td><td>EXT held + combo <kbd>S</kbd>+<kbd>D</kbd></td></tr>
-        <tr><td><span class="legend"><span style="background: var(--mou);">MOUSE</span></span></td><td>tap combo <kbd>X</kbd>+<kbd>C</kbd> (toggle)</td></tr>
+        <tr><td>SYM</td><td>tap right outer thumb</td></tr>
+        <tr><td>EXT</td><td>hold left outer thumb</td></tr>
+        <tr><td>FNC</td><td>both outer thumbs</td></tr>
+        <tr><td>SET</td><td>both left thumbs</td></tr>
+        <tr><td>WIN</td><td>EXT + <kbd>S</kbd>+<kbd>D</kbd></td></tr>
+        <tr><td>MOUSE</td><td>tap <kbd>X</kbd>+<kbd>C</kbd></td></tr>
       </table>
     </div>
-
-    <!-- Combos -->
     <div class="card">
-      <h2>Combos</h2>
+      <h2>Common tasks</h2>
       <table>
-        <tr><th>Keys</th><th>Action</th></tr>
-        <tr><td><kbd>D</kbd>+<kbd>F</kbd></td><td>Alt+Space (FancyZones cycle)</td></tr>
-        <tr><td><kbd>J</kbd>+<kbd>K</kbd></td><td>Win+Shift+S (snipping tool)</td></tr>
-        <tr><td><kbd>X</kbd>+<kbd>C</kbd></td><td>toggle mouse mode</td></tr>
-        <tr><td><kbd>S</kbd>+<kbd>D</kbd> on EXT</td><td>enter window-snap</td></tr>
-        <tr><td>both left thumbs</td><td>SETTINGS</td></tr>
+        <tr><td>Backspace</td><td>EXT + <kbd>J</kbd> pos.</td></tr>
+        <tr><td>Snip screenshot</td><td><kbd>J</kbd>+<kbd>K</kbd></td></tr>
+        <tr><td>FZ cycle</td><td><kbd>D</kbd>+<kbd>F</kbd></td></tr>
+        <tr><td>Send to TV</td><td>EXT + <kbd>S</kbd>+<kbd>D</kbd> + <kbd>↓</kbd></td></tr>
+        <tr><td>Maximize</td><td>EXT + <kbd>S</kbd>+<kbd>D</kbd> + <kbd>↑</kbd></td></tr>
+        <tr><td>Mouse on/off</td><td><kbd>X</kbd>+<kbd>C</kbd></td></tr>
       </table>
     </div>
-
-    <!-- Window snap quick -->
     <div class="card">
-      <h2>Window snap (hold EXT + S+D, then…)</h2>
+      <h2>Behavior glossary</h2>
       <table>
-        <tr><td><kbd>←</kbd></td><td>UW left zone</td></tr>
-        <tr><td><kbd>→</kbd></td><td>UW right zone</td></tr>
-        <tr><td><kbd>↑</kbd></td><td>maximize current monitor</td></tr>
-        <tr><td><kbd>↓</kbd></td><td>cycle to other monitor + fill</td></tr>
+        <tr><td><code>&amp;kp</code></td><td>plain key press</td></tr>
+        <tr><td><code>&amp;mo</code></td><td>momentary layer (held)</td></tr>
+        <tr><td><code>&amp;sl</code></td><td>sticky layer (one key)</td></tr>
+        <tr><td><code>&amp;sk</code></td><td>sticky modifier</td></tr>
+        <tr><td><code>&amp;qt</code></td><td>quick-tap hold</td></tr>
+        <tr><td><code>&amp;mmv / &amp;mkp / &amp;msc</code></td><td>mouse move / click / scroll</td></tr>
       </table>
     </div>
-
-    <!-- Mouse quick -->
-    <div class="card">
-      <h2>Mouse mode (toggle X+C)</h2>
-      <table>
-        <tr><td><kbd>I</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd></td><td>cursor up / left / down / right</td></tr>
-        <tr><td><kbd>H</kbd> / <kbd>N</kbd></td><td>scroll up / down</td></tr>
-        <tr><td><kbd>Y</kbd> / <kbd>U</kbd></td><td>scroll left / right</td></tr>
-        <tr><td>RI / RO thumb</td><td>left / right click</td></tr>
-      </table>
-    </div>
-
-    <!-- Wishlist actions cheat sheet -->
-    <div class="card full">
-      <h2>Cheat-sheet — common tasks</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; font-size: 12px;">
-        <div><b>Backspace</b> — hold left-outer thumb (EXT), tap <kbd>J</kbd> position</div>
-        <div><b>Maximize window</b> — EXT + <kbd>S</kbd>+<kbd>D</kbd> + <kbd>↑</kbd></div>
-        <div><b>Screenshot (snip)</b> — <kbd>J</kbd>+<kbd>K</kbd></div>
-        <div><b>Send window to thinkvision</b> — EXT + <kbd>S</kbd>+<kbd>D</kbd> + <kbd>↓</kbd></div>
-        <div><b>Mouse on/off</b> — tap <kbd>X</kbd>+<kbd>C</kbd></div>
-        <div><b>Switch BT profile</b> — both left thumbs → BT0..BT5</div>
-        <div><b>FancyZones cycle</b> — <kbd>D</kbd>+<kbd>F</kbd></div>
-        <div><b>Recover stuck modifier</b> — both left thumbs → <code>unstick</code></div>
-        <div><b>Function keys</b> — both outer thumbs → F-row</div>
-        <div><b>PrintScreen (full)</b> — both outer thumbs + <kbd>K</kbd> position</div>
-      </div>
-    </div>
-
   </div>
 
   <footer>
-    <span>Sticky mods (sLA/sLG/sLS/sLC) on EXT/FNC: tap once, applies to next key.</span>
-    <span>Print A4 · CTRL+P</span>
+    <span>Highlighted keys = activate or are reachable on a sub-layer.</span>
+    <span>Print A4 · Ctrl+P</span>
   </footer>
 </div>
 </body>
