@@ -55,15 +55,17 @@
             bindings = <&kp LSHIFT &kp RSHIFT &kp LCTRL &kp RCTRL &kp LALT &kp RALT &kp LGUI &kp RGUI>;
         };
 
-        // Move window to the other monitor (cycles), then snap to its zone 1.
-        // With UW + thinkvision, this sends the window to the thinkvision
-        // (or back to UW left) and fills its zone 1.
+        // Move window to the other monitor (cycles), then snap into
+        // that monitor's zone via FancyZones' Win+Left override.
+        // With UW + thinkvision, this sends the window to the
+        // thinkvision (or back to UW) and snaps it into a zone.
+        // Requires FancyZones "Override Windows Snap" enabled.
 
         snap_to_other: snap_to_other {
             label = "ZM_snap_to_other";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LG(LS(RIGHT))>, <&kp LG(LC(LA(N1)))>;
+            bindings = <&kp LG(LS(RIGHT))>, <&kp LG(LEFT)>;
         };
     };
 
@@ -221,11 +223,18 @@
 
         window_layer {
             label = "Win";
+            // Arrows fire FancyZones zone-cycling shortcuts. Requires
+            // PowerToys FancyZones "Override Windows Snap" with
+            // "Move windows based on: Zone index" enabled.
+            //   J (←) Win+Left  : cycle to previous zone on current monitor
+            //   L (→) Win+Right : cycle to next zone
+            //   I (↑) Win+Up    : maximize (native, not overridden in Zone-index mode)
+            //   K (↓) macro     : Win+Shift+Right then Win+Left -> send to other monitor and snap
             bindings = <
-&trans  &trans  &trans  &trans  &trans    &trans  &trans              &kp LG(UP)      &trans                &trans
-&trans  &trans  &trans  &trans  &trans    &trans  &kp LG(LC(LA(N1)))  &snap_to_other  &kp LG(LC(LA(N2)))    &trans
-&trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans          &trans                &trans
-&trans  &trans                                                                        &trans                &trans
+&trans  &trans  &trans  &trans  &trans    &trans  &trans         &kp LG(UP)      &trans          &trans
+&trans  &trans  &trans  &trans  &trans    &trans  &kp LG(LEFT)   &snap_to_other  &kp LG(RIGHT)   &trans
+&trans  &trans  &trans  &trans  &trans    &trans  &trans         &trans          &trans          &trans
+&trans  &trans                                                                   &trans          &trans
             >;
         };
 
