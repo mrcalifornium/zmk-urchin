@@ -184,6 +184,21 @@
             >;
         };
 
+        // NOTE: layer node order MUST match the #define indices above.
+        // The order here is BASE, SYM, EXT, FNC, SETTINGS (4), WIN (5), MOUSE (6).
+
+        // Used to change the keyboard's settings.
+
+        settings_layer {
+            label = "Sett.";
+            bindings = <
+&bootloader  &none  &none  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 3  &none  &unstick  &none  &bootloader
+&none        &none  &none  &none       &bt BT_SEL 1    &bt BT_SEL 4  &none  &none     &none  &none
+&none        &none  &none  &none       &bt BT_SEL 2    &bt BT_SEL 5  &none  &none     &none  &none
+&none        &none                                                                    &none  &none
+            >;
+        };
+
         // Window snap layer — entered via S+D combo while on EXT.
         // Right-hand arrows fire FancyZones / Windows snap shortcuts.
 
@@ -208,18 +223,6 @@
 &trans  &trans  &trans  &trans  &trans    &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans
 &trans  &trans  &trans  &trans  &trans    &msc SCRL_LEFT  &msc SCRL_RIGHT &trans          &trans           &trans
 &trans  &trans                                                                            &mkp LCLK        &mkp RCLK
-            >;
-        };
-
-        // Used to change the keyboard's settings.
-
-        settings_layer {
-            label = "Sett.";
-            bindings = <
-&bootloader  &none  &none  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 3  &none  &unstick  &none  &bootloader
-&none        &none  &none  &none       &bt BT_SEL 1    &bt BT_SEL 4  &none  &none     &none  &none
-&none        &none  &none  &none       &bt BT_SEL 2    &bt BT_SEL 5  &none  &none     &none  &none
-&none        &none                                                                    &none  &none
             >;
         };
     };
