@@ -35,9 +35,8 @@ Added window-snap, mouse, and one-hand screenshot capabilities. Tuned wireless r
 | Combo | Positions | Layers | Action |
 |---|---|---|---|
 | `combo_screenshot` | `J`+`K` (16+17), 35 ms | BASE | `Win+Shift+S` (Snipping Tool) |
-| `combo_win` | `S`+`D` (11+12), 200 ms | EXT | `&mo WIN` |
 | `combo_mouse` | `X`+`C` (21+22), 50 ms | BASE, MOUSE | `&tog MOUSE` (toggle on/off) |
-| `combo_hyper` | `F`+`J` (13+16), 40 ms | BASE | sticky Hyper (`Ctrl+Alt+Win+Shift`) — paired with AHK |
+| `combo_hyper` | `F`+`J` (13+16), 40 ms | BASE | sticky Hyper (`Ctrl+Alt+Win+Shift`) — paired with AHK for both app launching AND window snapping |
 
 ### New layers
 
@@ -80,10 +79,20 @@ Left hand: `~ < > " '` on top, `` ` ^ & * \ `` on bottom.
 
 `! @ # $ %` are no longer dedicated — `Shift+1..5` on the same layer (LSHIFT is on left inner thumb of SYM). Same for `^ & * ( )` via `Shift+6..0`. `{ }` via `Shift+[/]`. `?` via `Shift+/`.
 
-## App launcher (Hyper + AHK)
+## Hyper + AHK — app launcher AND window snap
+
+The previous ZMK WIN layer (S+D combo + arrows fires Win-arrow snap) was fragile because of layered-combo timing and FancyZones override quirks. It's been removed and replaced with host-side AHK:
 
 - `F+J` combo on base fires sticky Hyper (`Ctrl+Alt+Win+Shift`).
-- [tools/urchin-apps.ahk](../tools/urchin-apps.ahk) catches Hyper+letter on the host and focuses-or-launches apps. Drop into `shell:startup` and edit per machine.
+- [tools/urchin-apps.ahk](../tools/urchin-apps.ahk) catches Hyper+letter on the host and routes:
+  - **Apps** (focus-or-launch): B browser, E Outlook, F Explorer, T Terminal, C VS Code, W Word, X Excel.
+  - **Window snaps** (pixel-perfect `WinMove` from `MonitorGetWorkArea`):
+    - H = UW left half, L = UW right half, M = UW maximize
+    - N = ThinkVision maximize
+    - I = top-center 1/3 × 1/3 on UW
+    - R = bottom-center 1920×1080 on UW (Teams share-friendly)
+
+Pure AHK, no FancyZones dependency. Robust to resolution / scaling changes.
 
 ## What did NOT change
 

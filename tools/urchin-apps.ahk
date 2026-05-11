@@ -69,6 +69,71 @@ ActivateOrLaunch(winQuery, runTarget) {
 ; P = PowerShell (alternative to T)
 ; ^!#+p::ActivateOrLaunch("ahk_exe pwsh.exe", "pwsh.exe")
 
+; ─── Window snap helpers ─────────────────────────────────────────────
+; Snap actions live on the same Hyper trigger as app launches, just on
+; different letters. AHK does pixel-perfect WinMove based on the actual
+; monitor work area, so it stays correct across resolution / scaling
+; changes and doesn't depend on FancyZones / Windows Snap behaviour.
+;
+; Monitor numbering (Settings → Display → Identify):
+;   1 = Ultrawide (UW)         3440 x 1440  @ 125%, top
+;   2 = ThinkVision (FullHD)   1920 x 1080  @ 125%, below UW
+
+GetMonitor(idx) {
+    MonitorGetWorkArea(idx, &L, &T, &R, &B)
+    return { left: L, top: T, right: R, bottom: B, width: R - L, height: B - T }
+}
+
+SnapTo(x, y, w, h) {
+    if !WinExist("A")
+        return
+    WinRestore("A")
+    WinMove(x, y, w, h, "A")
+}
+
+SnapToMonitor(idx) {
+    if !WinExist("A")
+        return
+    m := GetMonitor(idx)
+    WinRestore("A")
+    WinMove(m.left, m.top, m.width, m.height, "A")
+    WinMaximize("A")
+}
+
+; ─── Window snap bindings (Hyper + letter) ───────────────────────────
+
+; Hyper+H : UW left half
+^!#+h::{
+    m := GetMonitor(1)
+    SnapTo(m.left, m.top, m.width / 2, m.height)
+}
+
+; Hyper+L : UW right half
+^!#+l::{
+    m := GetMonitor(1)
+    SnapTo(m.left + m.width / 2, m.top, m.width / 2, m.height)
+}
+
+; Hyper+M : UW full / maximize
+^!#+m::SnapToMonitor(1)
+
+; Hyper+N : ThinkVision full / maximize
+^!#+n::SnapToMonitor(2)
+
+; Hyper+I : top-center 1/3 × 1/3 box on UW
+^!#+i::{
+    m := GetMonitor(1)
+    w := m.width / 3, h := m.height / 3
+    SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
+}
+
+; Hyper+R : bottom-center 1920×1080 box on UW (Teams share-friendly)
+^!#+r::{
+    m := GetMonitor(1)
+    w := 1920, h := 1080
+    SnapTo(m.left + (m.width - w) / 2, m.top + m.height - h, w, h)
+}
+
 ; ─── Tray ────────────────────────────────────────────────────────────
 ; Optional: rename the tray entry so you can spot it.
-A_IconTip := "Urchin app launcher"
+A_IconTip := "Urchin app launcher + window snaps"

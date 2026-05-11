@@ -16,8 +16,7 @@
 #define EXT 2
 #define FNC 3
 #define SETTINGS 4
-#define WIN 5
-#define MOUSE 6
+#define MOUSE 5
 
 // -----------------
 
@@ -55,18 +54,6 @@
             bindings = <&kp LSHIFT &kp RSHIFT &kp LCTRL &kp RCTRL &kp LALT &kp RALT &kp LGUI &kp RGUI>;
         };
 
-        // Move window to the other monitor (cycles), then snap into
-        // that monitor's zone via FancyZones' Win+Left override.
-        // With UW + thinkvision, this sends the window to the
-        // thinkvision (or back to UW) and snaps it into a zone.
-        // Requires FancyZones "Override Windows Snap" enabled.
-
-        snap_to_other: snap_to_other {
-            label = "ZM_snap_to_other";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(LS(RIGHT))>, <&kp LG(LEFT)>;
-        };
     };
 
     combos {
@@ -90,17 +77,6 @@
             timeout-ms = <200>;
             key-positions = <30 31>;
             bindings = <&mo SETTINGS>;
-        };
-
-        // While on the EXT layer, S+D (left ring + middle, home row)
-        // activates the WIN layer so the right hand can snap windows
-        // with the arrow keys.
-
-        combo_win {
-            timeout-ms = <200>;
-            key-positions = <11 12>;
-            bindings = <&mo WIN>;
-            layers = <EXT>;
         };
 
         // left index & middle fingers (home-row)
@@ -204,7 +180,9 @@
         };
 
         // NOTE: layer node order MUST match the #define indices above.
-        // The order here is BASE, SYM, EXT, FNC, SETTINGS (4), WIN (5), MOUSE (6).
+        // The order here is BASE, SYM, EXT, FNC, SETTINGS (4), MOUSE (5).
+        // Window-snap actions are handled host-side by AHK via Hyper+letter
+        // (see tools/urchin-apps.ahk), no dedicated layer needed.
 
         // Used to change the keyboard's settings.
 
@@ -215,26 +193,6 @@
 &none        &none  &none  &none       &bt BT_SEL 1    &bt BT_SEL 4  &none  &none     &none  &none
 &none        &none  &none  &none       &bt BT_SEL 2    &bt BT_SEL 5  &none  &none     &none  &none
 &none        &none                                                                    &none  &none
-            >;
-        };
-
-        // Window snap layer — entered via S+D combo while on EXT.
-        // Right-hand arrows fire FancyZones / Windows snap shortcuts.
-
-        window_layer {
-            label = "Win";
-            // Arrows fire FancyZones zone-cycling shortcuts. Requires
-            // PowerToys FancyZones "Override Windows Snap" with
-            // "Move windows based on: Zone index" enabled.
-            //   J (←) Win+Left  : cycle to previous zone on current monitor
-            //   L (→) Win+Right : cycle to next zone
-            //   I (↑) Win+Up    : maximize (native, not overridden in Zone-index mode)
-            //   K (↓) macro     : Win+Shift+Right then Win+Left -> send to other monitor and snap
-            bindings = <
-&trans  &trans  &trans  &trans  &trans    &trans  &trans         &kp LG(UP)      &trans          &trans
-&trans  &trans  &trans  &trans  &trans    &trans  &kp LG(LEFT)   &snap_to_other  &kp LG(RIGHT)   &trans
-&trans  &trans  &trans  &trans  &trans    &trans  &trans         &trans          &trans          &trans
-&trans  &trans                                                                   &trans          &trans
             >;
         };
 

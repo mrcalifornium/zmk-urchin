@@ -164,6 +164,10 @@
   .key .l.tiny { font-size: 7px; font-weight: 600; }
   .key.t { background: white; border-color: var(--border-soft); }
   .key.t .l { color: #c0c5d0; }
+  /* Bound: an assigned action — solid dark fill */
+  .key.bound { background: #1a1d23; border-color: #1a1d23; }
+  .key.bound .l { color: white; font-weight: 600; }
+  .key.bound .b { color: rgba(255, 255, 255, 0.55); }
   .key.hl-base { box-shadow: inset 0 0 0 2px var(--base); }
   .key.hl-sym  { box-shadow: inset 0 0 0 2px var(--sym); }
   .key.hl-ext  { box-shadow: inset 0 0 0 2px var(--ext); }
@@ -367,26 +371,26 @@
     </div>
   </div>
 
-  <!-- WIN -->
+  <!-- Window snap (via AHK, no ZMK layer) -->
   <div class="layer">
-    <div class="layer-label ll-win">Win<span class="how">EXT held + S+D combo</span></div>
+    <div class="layer-label ll-win">Win<span class="how">F+J then a letter (AHK)</span></div>
     <div class="kb">
       <div class="half left">
         <div class="rows">
           <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
           <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
           <div class="col c2"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c3"><div class="key bound"><div class="b">R</div><div class="l small">share</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
           <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
         </div>
         <div class="thumbs left"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
       </div>
       <div class="half right">
         <div class="rows">
-          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="l small">UW←</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c2"><div class="key hl-win"><div class="l small">MAX</div></div><div class="key hl-win"><div class="l tiny">→TV2</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="l small">UW→</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key bound"><div class="b">H</div><div class="l small">L½</div></div><div class="key bound"><div class="b">N</div><div class="l small">→TV</div></div></div>
+          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key bound"><div class="b">M</div><div class="l small">max</div></div></div>
+          <div class="col c2"><div class="key bound"><div class="b">I</div><div class="l small">top⅓</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key bound"><div class="b">L</div><div class="l small">R½</div></div><div class="key t"><div class="l">·</div></div></div>
           <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
         </div>
         <div class="thumbs right"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
@@ -469,10 +473,12 @@
         <tr><td>Backspace</td><td>EXT + <kbd>J</kbd> pos.</td></tr>
         <tr><td>Snip screenshot</td><td><kbd>J</kbd>+<kbd>K</kbd></td></tr>
         <tr><td>FZ cycle</td><td><kbd>D</kbd>+<kbd>F</kbd></td></tr>
-        <tr><td>Send to thinkvision</td><td>EXT + <kbd>S</kbd>+<kbd>D</kbd> + <kbd>↓</kbd></td></tr>
-        <tr><td>Maximize</td><td>EXT + <kbd>S</kbd>+<kbd>D</kbd> + <kbd>↑</kbd></td></tr>
+        <tr><td>Send to thinkvision</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>N</kbd></td></tr>
+        <tr><td>Maximize on UW</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>M</kbd></td></tr>
+        <tr><td>UW left / right half</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>H</kbd> / <kbd>L</kbd></td></tr>
+        <tr><td>Teams share box</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>R</kbd></td></tr>
         <tr><td>Mouse on/off</td><td><kbd>X</kbd>+<kbd>C</kbd></td></tr>
-        <tr><td>Launch app</td><td><kbd>F</kbd>+<kbd>J</kbd> then letter (AHK)</td></tr>
+        <tr><td>Launch app</td><td><kbd>F</kbd>+<kbd>J</kbd> → letter (AHK)</td></tr>
       </table>
     </div>
     <div class="card">

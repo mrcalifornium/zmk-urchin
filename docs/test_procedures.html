@@ -250,16 +250,18 @@
   </section>
 
   <section class="step" data-step="5">
-    <h2><span class="num">5</span>Window snap — WIN layer</h2>
-    <div class="desc">Open a window on the ultrawide first.</div>
+    <h2><span class="num">5</span>Window snap — Hyper+letter via AHK</h2>
+    <div class="desc">Requires <code>tools/urchin-apps.ahk</code> running. Open a window on the UW first.</div>
     <ul class="checks">
-      <li><input type="checkbox" id="c5-1"><label for="c5-1">Hold left-outer thumb, squeeze <kbd>S</kbd>+<kbd>D</kbd>, press <kbd>←</kbd> → snaps to UW left zone.</label></li>
-      <li><input type="checkbox" id="c5-2"><label for="c5-2">Same gesture + <kbd>→</kbd> → snaps to UW right zone.</label></li>
-      <li><input type="checkbox" id="c5-3"><label for="c5-3">Same gesture + <kbd>↑</kbd> → maximizes on the ultrawide.</label></li>
-      <li><input type="checkbox" id="c5-4"><label for="c5-4">Same gesture + <kbd>↓</kbd> → moves to thinkvision and fills it.</label></li>
-      <li><input type="checkbox" id="c5-5"><label for="c5-5">From thinkvision, same gesture + <kbd>↓</kbd> → cycles back to UW left.</label></li>
+      <li><input type="checkbox" id="c5-1"><label for="c5-1">Tap <kbd>F</kbd>+<kbd>J</kbd>, then <kbd>H</kbd> → window fills UW left half exactly.</label></li>
+      <li><input type="checkbox" id="c5-2"><label for="c5-2"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>L</kbd> → UW right half.</label></li>
+      <li><input type="checkbox" id="c5-3"><label for="c5-3"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>M</kbd> → maximizes on UW.</label></li>
+      <li><input type="checkbox" id="c5-4"><label for="c5-4"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>N</kbd> → window moves to ThinkVision and maximizes there.</label></li>
+      <li><input type="checkbox" id="c5-5"><label for="c5-5">From ThinkVision, <kbd>F</kbd>+<kbd>J</kbd>, then <kbd>M</kbd> → returns to UW and maximizes.</label></li>
+      <li><input type="checkbox" id="c5-6"><label for="c5-6"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>I</kbd> → small box top-center of UW (~1/3 × 1/3).</label></li>
+      <li><input type="checkbox" id="c5-7"><label for="c5-7"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>R</kbd> → bottom-center 1920×1080 box on UW (Teams share rectangle).</label></li>
     </ul>
-    <div class="fail"><b>If <kbd>↓</kbd> doesn't reach the thinkvision:</b> Windows monitor adjacency may want <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd> instead. Check <i>Display Settings</i>.</div>
+    <div class="fail"><b>If nothing happens:</b> AHK isn't running, or the Hyper combo didn't fire. Check tray for AHK icon. <b>If wrong monitor:</b> open <code>tools/urchin-apps.ahk</code> and swap which <code>GetMonitor()</code> index is 1 vs 2.</div>
   </section>
 
   <section class="step" data-step="6">

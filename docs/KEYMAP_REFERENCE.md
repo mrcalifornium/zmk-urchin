@@ -15,8 +15,7 @@
 | **EXT** (2) | hold left-outer thumb (LO) | momentary — released on let-go |
 | **FNC** (3) | hold both outer thumbs (LO + RO) — i.e. EXT + RO | nested momentary |
 | **SETTINGS** (4) | hold both left thumbs (LO + LI) | combo |
-| **WIN** (5) | from EXT, chord `S+D` | momentary, only while combo held |
-| **MOUSE** (6) | tap `X+C` from BASE | toggle on/off |
+| **MOUSE** (5) | tap `X+C` from BASE | toggle on/off |
 
 ---
 
@@ -95,22 +94,20 @@ Reach: both left thumbs at once.
 
 ---
 
-## WIN — window snap (FancyZones)
+## Window snap (host-side via AHK)
 
-```
- _   _   _   _   _   │   _   _   ↑      _   _
- _   _   _   _   _   │   _   ←   ↓      →   _
- _   _   _   _   _   │   _   _   _      _   _
-        _    _       │   _   _
-```
+Window snapping is no longer a ZMK layer — it's a set of Hyper+letter chords routed by the `urchin-apps.ahk` script. The Hyper combo (F+J) arms `Ctrl+Alt+Win+Shift`, then the next letter fires a pixel-perfect `WinMove`. Robust to resolution / scaling changes, no FancyZones dependency.
 
-Where:
-- **←** = `Win+Ctrl+Alt+1` (UW left zone)
-- **→** = `Win+Ctrl+Alt+2` (UW right zone)
-- **↑** = `Win+Up` (maximize current monitor)
-- **↓** = `Win+Shift+→` then `Win+Ctrl+Alt+1` (cycle to other monitor + fill)
+| Chord | Action |
+|---|---|
+| `Hyper+H` | UW left half |
+| `Hyper+L` | UW right half |
+| `Hyper+M` | UW maximize |
+| `Hyper+N` | ThinkVision (move + maximize) |
+| `Hyper+I` | Top-center 1/3 × 1/3 box on UW |
+| `Hyper+R` | Bottom-center 1920×1080 (Teams share-friendly) on UW |
 
-Reach: hold LO (EXT), then squeeze `S+D` (left ring + middle, home row), then press the arrow with the right hand.
+Usage: tap **F+J**, then a letter.
 
 ---
 
@@ -139,10 +136,12 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 |---|---|
 | **Backspace** | hold LO (EXT), press `J` position |
 | **Screenshot** | `J+K` (BASE) |
-| **Send window to UW left** | hold LO, squeeze `S+D`, press `←` |
-| **Send window to UW right** | hold LO, squeeze `S+D`, press `→` |
-| **Maximize window** | hold LO, squeeze `S+D`, press `↑` |
-| **Send window to thinkvision** | hold LO, squeeze `S+D`, press `↓` |
+| **Send window to UW left** | tap `F+J`, then `H` |
+| **Send window to UW right** | tap `F+J`, then `L` |
+| **Maximize window** | tap `F+J`, then `M` |
+| **Send window to thinkvision** | tap `F+J`, then `N` |
+| **Top-center 1/3 box on UW** | tap `F+J`, then `I` |
+| **Teams share 1920×1080 box** | tap `F+J`, then `R` |
 | **Mouse mode on/off** | tap `X+C` (BASE) |
 | **Launch app (Hyper)** | tap `F+J`, then a letter (B/E/F/T/C/W/X by default) |
 | **`Alt+Space`** (FZ cycle) | `D+F` (BASE) |
