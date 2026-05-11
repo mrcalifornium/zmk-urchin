@@ -256,10 +256,10 @@
       <li><input type="checkbox" id="c5-1"><label for="c5-1">Tap <kbd>F</kbd>+<kbd>J</kbd>, then <kbd>H</kbd> → window fills UW left half exactly.</label></li>
       <li><input type="checkbox" id="c5-2"><label for="c5-2"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>L</kbd> → UW right half.</label></li>
       <li><input type="checkbox" id="c5-3"><label for="c5-3"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>M</kbd> → maximizes on UW.</label></li>
-      <li><input type="checkbox" id="c5-4"><label for="c5-4"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>N</kbd> → window moves to ThinkVision and maximizes there.</label></li>
+      <li><input type="checkbox" id="c5-4"><label for="c5-4"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>V</kbd> → window moves to ThinkVision and maximizes there.</label></li>
       <li><input type="checkbox" id="c5-5"><label for="c5-5">From ThinkVision, <kbd>F</kbd>+<kbd>J</kbd>, then <kbd>M</kbd> → returns to UW and maximizes.</label></li>
       <li><input type="checkbox" id="c5-6"><label for="c5-6"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>I</kbd> → small box top-center of UW (~1/3 × 1/3).</label></li>
-      <li><input type="checkbox" id="c5-7"><label for="c5-7"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>R</kbd> → bottom-center 1920×1080 box on UW (Teams share rectangle).</label></li>
+      <li><input type="checkbox" id="c5-7"><label for="c5-7"><kbd>F</kbd>+<kbd>J</kbd>, then <kbd>S</kbd> → bottom-center 1920×1080 box on UW (Teams share rectangle).</label></li>
     </ul>
     <div class="fail"><b>If nothing happens:</b> AHK isn't running, or the Meh combo didn't fire. Check tray for AHK icon. <b>If wrong monitor:</b> open <code>tools/urchin-apps.ahk</code> and swap which <code>GetMonitor()</code> index is 1 vs 2.</div>
   </section>
@@ -283,11 +283,15 @@
     <div class="desc">Requires <code>tools/urchin-apps.ahk</code> running. Launch it via <code>shell:startup</code> if not already in place.</div>
     <ul class="checks">
       <li><input type="checkbox" id="c7a-1"><label for="c7a-1"><kbd>F</kbd>+<kbd>J</kbd> tap (both index fingers, home row) — no visual feedback expected; sticky Meh is now armed for one keystroke.</label></li>
-      <li><input type="checkbox" id="c7a-2"><label for="c7a-2"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>B</kbd> → browser opens or focuses.</label></li>
-      <li><input type="checkbox" id="c7a-3"><label for="c7a-3"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>E</kbd> → Outlook opens or focuses.</label></li>
-      <li><input type="checkbox" id="c7a-4"><label for="c7a-4"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>F</kbd> → File Explorer opens.</label></li>
-      <li><input type="checkbox" id="c7a-5"><label for="c7a-5">Type <code>fjords fjord</code> normally — no app launches (combo timeout rejects sequential presses).</label></li>
-      <li><input type="checkbox" id="c7a-6"><label for="c7a-6"><kbd>F</kbd>+<kbd>J</kbd> then wait 2 seconds then any letter — sticky expired, letter types normally.</label></li>
+      <li><input type="checkbox" id="c7a-2"><label for="c7a-2"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>B</kbd> → Edge opens with the personal profile.</label></li>
+      <li><input type="checkbox" id="c7a-3"><label for="c7a-3"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>E</kbd> → Edge opens with the work profile (Profile 3).</label></li>
+      <li><input type="checkbox" id="c7a-4"><label for="c7a-4"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>O</kbd> → new Outlook opens or focuses.</label></li>
+      <li><input type="checkbox" id="c7a-5"><label for="c7a-5"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>T</kbd> → new Teams opens or focuses.</label></li>
+      <li><input type="checkbox" id="c7a-6"><label for="c7a-6"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>C</kbd> → Claude desktop opens or focuses.</label></li>
+      <li><input type="checkbox" id="c7a-7"><label for="c7a-7"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>N</kbd> / <kbd>R</kbd> → OneNote / Calculator open.</label></li>
+      <li><input type="checkbox" id="c7a-8"><label for="c7a-8"><kbd>F</kbd>+<kbd>J</kbd> then <kbd>F</kbd> / <kbd>W</kbd> / <kbd>X</kbd> → Explorer / Word / Excel open.</label></li>
+      <li><input type="checkbox" id="c7a-9"><label for="c7a-9">Type <code>fjords fjord</code> normally — no app launches (combo timeout rejects sequential presses).</label></li>
+      <li><input type="checkbox" id="c7a-10"><label for="c7a-10"><kbd>F</kbd>+<kbd>J</kbd> then wait 2 seconds then any letter — sticky expired, letter types normally.</label></li>
     </ul>
     <div class="fail"><b>If nothing launches:</b> AHK script not running. Check tray for AutoHotkey icon. <b>If wrong app:</b> edit the path in the .ahk file and reload.</div>
   </section>

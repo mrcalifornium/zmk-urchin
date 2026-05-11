@@ -100,12 +100,16 @@ Window snapping is no longer a ZMK layer — it's a set of Meh+letter chords rou
 
 | Chord | Action |
 |---|---|
+App letters: `B` Edge personal, `C` Claude, `E` Edge work, `F` Explorer, `N` OneNote, `O` Outlook, `R` Calculator, `T` Teams, `W` Word, `X` Excel.
+
+Window snap letters:
+
 | `Meh+H` | UW left half |
 | `Meh+L` | UW right half |
 | `Meh+M` | UW maximize |
-| `Meh+N` | ThinkVision (move + maximize) |
+| `Meh+V` | ThinkVision (move + maximize) |
 | `Meh+I` | Top-center 1/3 × 1/3 box on UW |
-| `Meh+R` | Bottom-center 1920×1080 (Teams share-friendly) on UW |
+| `Meh+S` | Bottom-center 1920×1080 (Teams share-friendly) on UW |
 
 Usage: tap **F+J**, then a letter.
 
@@ -139,11 +143,11 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 | **Send window to UW left** | tap `F+J`, then `H` |
 | **Send window to UW right** | tap `F+J`, then `L` |
 | **Maximize window** | tap `F+J`, then `M` |
-| **Send window to thinkvision** | tap `F+J`, then `N` |
+| **Send window to thinkvision** | tap `F+J`, then `V` |
 | **Top-center 1/3 box on UW** | tap `F+J`, then `I` |
-| **Teams share 1920×1080 box** | tap `F+J`, then `R` |
+| **Teams share 1920×1080 box** | tap `F+J`, then `S` |
 | **Mouse mode on/off** | tap `X+C` (BASE) |
-| **Launch app (Meh)** | tap `F+J`, then a letter (B/E/F/T/C/W/X by default) |
+| **Launch app (Meh)** | tap `F+J`, then a letter (B/C/E/F/N/O/R/T/W/X) |
 | **`Alt+Space`** (FZ cycle) | `D+F` (BASE) |
 | **Recover from stuck modifier** | both left thumbs → SETTINGS, press position 7 |
 | **Switch BT profile** | both left thumbs → SETTINGS, `BT0..BT5` keys |

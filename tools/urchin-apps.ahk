@@ -12,68 +12,86 @@
 ;        %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup
 ;      (open with: Win+R -> shell:startup)
 ;   3. Double-click to run now (also auto-starts on login).
-;
-; Edit this file to taste — the path-or-name in Run() needs to match
-; what's installed on this machine. The window title in WinExist() must
-; be loose enough to match the running window. ahk_exe matches the .exe
-; name; ahk_class matches the window class.
 
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
+LOCALAPPDATA := EnvGet("LOCALAPPDATA")
+
 ; Helper: focus existing window if it exists, otherwise launch it.
-; winQuery: an ahk_exe / ahk_class / partial title to find a running window
-; runTarget: what to pass to Run (a path or a name on PATH)
+; Handles tray-minimized / hidden windows (Teams, Outlook, etc.
+; "close to tray" leaves the window hidden — default WinExist doesn't
+; see those, so old launcher always thought the app wasn't running).
 ActivateOrLaunch(winQuery, runTarget) {
-    if WinExist(winQuery) {
-        WinActivate
-    } else {
-        try Run(runTarget)
+    prevDH := A_DetectHiddenWindows
+    DetectHiddenWindows(true)
+    try {
+        if hwnd := WinExist(winQuery) {
+            try WinShow(hwnd)             ; un-hide if tray-minimized
+            if WinGetMinMax(hwnd) = -1
+                WinRestore(hwnd)          ; restore if window-minimized
+            WinActivate(hwnd)
+            return
+        }
+    } finally {
+        DetectHiddenWindows(prevDH)
     }
+    try Run(runTarget)
 }
 
-; ─── Meh key bindings ──────────────────────────────────────────────
-; Hotkey syntax: ^ = Ctrl, ! = Alt, # = Win, + = Shift
+; Forward a Win+<slot> taskbar shortcut to Windows.
+; Windows interprets Win+1..9 as "activate or launch the Nth pinned
+; taskbar app" with built-in toggle behaviour. We use this for the
+; Edge profiles since Edge profile windows can't be distinguished by
+; process or title — but if each profile lives at a fixed taskbar
+; slot, Windows already knows which is which.
+;
+; We release the sticky-Meh modifiers (Ctrl/Alt/Shift) first so the
+; host sees a clean Win+<slot> chord, not Ctrl+Alt+Shift+Win+<slot>.
+TaskbarSlot(slot) {
+    SendInput("{LCtrl up}{LAlt up}{LShift up}#" slot)
+}
+
+; ─── Meh + letter app bindings ──────────────────────────────────────
+; Hotkey syntax: ^ = Ctrl, ! = Alt, + = Shift
 ; So ^!+b means Ctrl+Alt+Shift+B = "Meh+B"
 
-; B = Browser (Edge — change to chrome.exe / firefox.exe as needed)
-^!+b::ActivateOrLaunch("ahk_exe msedge.exe", "msedge.exe")
+; B = Personal browser at taskbar slot 8 (Chrome — or whichever you
+;     end up using for personal. Keep it pinned in position 8 of the
+;     taskbar from the left, counting only pinned items.)
+^!+b::TaskbarSlot(8)
 
-; E = Email (Outlook)
-^!+e::ActivateOrLaunch("ahk_exe OUTLOOK.EXE", "outlook.exe")
+; C = Claude desktop
+^!+c::ActivateOrLaunch("ahk_exe claude.exe", LOCALAPPDATA "\AnthropicClaude\claude.exe")
+
+; E = Work browser at taskbar slot 7 (Edge with work profile pinned
+;     in position 7 of the taskbar from the left.)
+^!+e::TaskbarSlot(7)
 
 ; F = File Explorer
 ^!+f::ActivateOrLaunch("ahk_class CabinetWClass", "explorer.exe")
 
-; T = Terminal (Windows Terminal)
-^!+t::ActivateOrLaunch("ahk_exe WindowsTerminal.exe", "wt.exe")
+; N = OneNote
+^!+n::ActivateOrLaunch("ahk_exe ONENOTE.EXE", "onenote.exe")
 
-; C = VS Code
-^!+c::ActivateOrLaunch("ahk_exe Code.exe", "code")
+; O = Outlook (new)
+^!+o::ActivateOrLaunch("ahk_exe olk.exe", "olk.exe")
 
-; X = Excel
-^!+x::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
+; R = Calculator
+^!+r::ActivateOrLaunch("Calculator", "calc.exe")
+
+; T = Teams (new)
+^!+t::ActivateOrLaunch("ahk_exe ms-teams.exe", "ms-teams.exe")
 
 ; W = Word
 ^!+w::ActivateOrLaunch("ahk_exe WINWORD.EXE", "winword.exe")
 
-; S = Slack
-; ^!+s::ActivateOrLaunch("ahk_exe slack.exe", A_AppData "\..\Local\slack\slack.exe")
-
-; M = Music (Spotify)
-; ^!+m::ActivateOrLaunch("ahk_exe Spotify.exe", A_AppData "\..\Roaming\Spotify\Spotify.exe")
-
-; O = Obsidian
-; ^!+o::ActivateOrLaunch("ahk_exe Obsidian.exe", A_AppData "\..\Local\Obsidian\Obsidian.exe")
-
-; P = PowerShell (alternative to T)
-; ^!+p::ActivateOrLaunch("ahk_exe pwsh.exe", "pwsh.exe")
+; X = Excel
+^!+x::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
 
 ; ─── Window snap helpers ─────────────────────────────────────────────
-; Snap actions live on the same Meh trigger as app launches, just on
-; different letters. AHK does pixel-perfect WinMove based on the actual
-; monitor work area, so it stays correct across resolution / scaling
-; changes and doesn't depend on FancyZones / Windows Snap behaviour.
+; Pixel-perfect WinMove based on MonitorGetWorkArea — robust to
+; resolution / scaling changes, no FancyZones dependency.
 ;
 ; Monitor numbering (Settings → Display → Identify):
 ;   1 = Ultrawide (UW)         3440 x 1440  @ 125%, top
@@ -100,40 +118,41 @@ SnapToMonitor(idx) {
     WinMaximize("A")
 }
 
-; ─── Window snap bindings (Meh + letter) ───────────────────────────
+; ─── Meh + letter window snap bindings ──────────────────────────────
 
-; Meh+H : UW left half
+; H = UW left half
 ^!+h::{
     m := GetMonitor(1)
     SnapTo(m.left, m.top, m.width / 2, m.height)
 }
 
-; Meh+L : UW right half
+; I = top-center 1/3 × 1/3 box on UW
+^!+i::{
+    m := GetMonitor(1)
+    w := m.width / 3
+    h := m.height / 3
+    SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
+}
+
+; L = UW right half
 ^!+l::{
     m := GetMonitor(1)
     SnapTo(m.left + m.width / 2, m.top, m.width / 2, m.height)
 }
 
-; Meh+M : UW full / maximize
+; M = UW maximize
 ^!+m::SnapToMonitor(1)
 
-; Meh+N : ThinkVision full / maximize
-^!+n::SnapToMonitor(2)
-
-; Meh+I : top-center 1/3 × 1/3 box on UW
-^!+i::{
+; S = bottom-center 1920×1080 box on UW (Teams share-friendly)
+^!+s::{
     m := GetMonitor(1)
-    w := m.width / 3, h := m.height / 3
-    SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
-}
-
-; Meh+R : bottom-center 1920×1080 box on UW (Teams share-friendly)
-^!+r::{
-    m := GetMonitor(1)
-    w := 1920, h := 1080
+    w := 1920
+    h := 1080
     SnapTo(m.left + (m.width - w) / 2, m.top + m.height - h, w, h)
 }
 
+; V = ThinkVision maximize
+^!+v::SnapToMonitor(2)
+
 ; ─── Tray ────────────────────────────────────────────────────────────
-; Optional: rename the tray entry so you can spot it.
 A_IconTip := "Urchin app launcher + window snaps"
