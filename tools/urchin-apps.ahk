@@ -1,9 +1,9 @@
 ; urchin-apps.ahk
 ; ----------------
-; AutoHotkey v2 script — listens for Hyper+letter (Ctrl+Alt+Win+Shift+<letter>)
+; AutoHotkey v2 script — listens for Meh+letter (Ctrl+Alt+Shift+<letter>)
 ; and either focuses the app if it's already running, or launches it.
 ;
-; The Urchin keyboard fires this from a base-layer combo: F+J = sticky Hyper.
+; The Urchin keyboard fires this from a base-layer combo: F+J = sticky Meh.
 ; Tap F+J, then a letter, AHK does the rest.
 ;
 ; Setup:
@@ -32,45 +32,45 @@ ActivateOrLaunch(winQuery, runTarget) {
     }
 }
 
-; ─── Hyper key bindings ──────────────────────────────────────────────
+; ─── Meh key bindings ──────────────────────────────────────────────
 ; Hotkey syntax: ^ = Ctrl, ! = Alt, # = Win, + = Shift
-; So ^!#+b means Ctrl+Alt+Win+Shift+B = "Hyper+B"
+; So ^!+b means Ctrl+Alt+Shift+B = "Meh+B"
 
 ; B = Browser (Edge — change to chrome.exe / firefox.exe as needed)
-^!#+b::ActivateOrLaunch("ahk_exe msedge.exe", "msedge.exe")
+^!+b::ActivateOrLaunch("ahk_exe msedge.exe", "msedge.exe")
 
 ; E = Email (Outlook)
-^!#+e::ActivateOrLaunch("ahk_exe OUTLOOK.EXE", "outlook.exe")
+^!+e::ActivateOrLaunch("ahk_exe OUTLOOK.EXE", "outlook.exe")
 
 ; F = File Explorer
-^!#+f::ActivateOrLaunch("ahk_class CabinetWClass", "explorer.exe")
+^!+f::ActivateOrLaunch("ahk_class CabinetWClass", "explorer.exe")
 
 ; T = Terminal (Windows Terminal)
-^!#+t::ActivateOrLaunch("ahk_exe WindowsTerminal.exe", "wt.exe")
+^!+t::ActivateOrLaunch("ahk_exe WindowsTerminal.exe", "wt.exe")
 
 ; C = VS Code
-^!#+c::ActivateOrLaunch("ahk_exe Code.exe", "code")
+^!+c::ActivateOrLaunch("ahk_exe Code.exe", "code")
 
 ; X = Excel
-^!#+x::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
+^!+x::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
 
 ; W = Word
-^!#+w::ActivateOrLaunch("ahk_exe WINWORD.EXE", "winword.exe")
+^!+w::ActivateOrLaunch("ahk_exe WINWORD.EXE", "winword.exe")
 
 ; S = Slack
-; ^!#+s::ActivateOrLaunch("ahk_exe slack.exe", A_AppData "\..\Local\slack\slack.exe")
+; ^!+s::ActivateOrLaunch("ahk_exe slack.exe", A_AppData "\..\Local\slack\slack.exe")
 
 ; M = Music (Spotify)
-; ^!#+m::ActivateOrLaunch("ahk_exe Spotify.exe", A_AppData "\..\Roaming\Spotify\Spotify.exe")
+; ^!+m::ActivateOrLaunch("ahk_exe Spotify.exe", A_AppData "\..\Roaming\Spotify\Spotify.exe")
 
 ; O = Obsidian
-; ^!#+o::ActivateOrLaunch("ahk_exe Obsidian.exe", A_AppData "\..\Local\Obsidian\Obsidian.exe")
+; ^!+o::ActivateOrLaunch("ahk_exe Obsidian.exe", A_AppData "\..\Local\Obsidian\Obsidian.exe")
 
 ; P = PowerShell (alternative to T)
-; ^!#+p::ActivateOrLaunch("ahk_exe pwsh.exe", "pwsh.exe")
+; ^!+p::ActivateOrLaunch("ahk_exe pwsh.exe", "pwsh.exe")
 
 ; ─── Window snap helpers ─────────────────────────────────────────────
-; Snap actions live on the same Hyper trigger as app launches, just on
+; Snap actions live on the same Meh trigger as app launches, just on
 ; different letters. AHK does pixel-perfect WinMove based on the actual
 ; monitor work area, so it stays correct across resolution / scaling
 ; changes and doesn't depend on FancyZones / Windows Snap behaviour.
@@ -100,35 +100,35 @@ SnapToMonitor(idx) {
     WinMaximize("A")
 }
 
-; ─── Window snap bindings (Hyper + letter) ───────────────────────────
+; ─── Window snap bindings (Meh + letter) ───────────────────────────
 
-; Hyper+H : UW left half
-^!#+h::{
+; Meh+H : UW left half
+^!+h::{
     m := GetMonitor(1)
     SnapTo(m.left, m.top, m.width / 2, m.height)
 }
 
-; Hyper+L : UW right half
-^!#+l::{
+; Meh+L : UW right half
+^!+l::{
     m := GetMonitor(1)
     SnapTo(m.left + m.width / 2, m.top, m.width / 2, m.height)
 }
 
-; Hyper+M : UW full / maximize
-^!#+m::SnapToMonitor(1)
+; Meh+M : UW full / maximize
+^!+m::SnapToMonitor(1)
 
-; Hyper+N : ThinkVision full / maximize
-^!#+n::SnapToMonitor(2)
+; Meh+N : ThinkVision full / maximize
+^!+n::SnapToMonitor(2)
 
-; Hyper+I : top-center 1/3 × 1/3 box on UW
-^!#+i::{
+; Meh+I : top-center 1/3 × 1/3 box on UW
+^!+i::{
     m := GetMonitor(1)
     w := m.width / 3, h := m.height / 3
     SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
 }
 
-; Hyper+R : bottom-center 1920×1080 box on UW (Teams share-friendly)
-^!#+r::{
+; Meh+R : bottom-center 1920×1080 box on UW (Teams share-friendly)
+^!+r::{
     m := GetMonitor(1)
     w := 1920, h := 1080
     SnapTo(m.left + (m.width - w) / 2, m.top + m.height - h, w, h)

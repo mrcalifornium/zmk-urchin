@@ -110,16 +110,17 @@
             layers = <BASE MOUSE>;
         };
 
-        // F+J (both index fingers, home row) -> sticky Hyper modifier
-        // (Ctrl+Alt+Win+Shift). Tap once, then a letter, and an
-        // AutoHotkey script on the host catches Hyper+letter to
-        // launch / focus apps. Cross-hand chord = effectively zero
-        // misfire risk.
+        // F+J (both index fingers, home row) -> sticky Meh modifier
+        // (Ctrl+Alt+Shift, no Win). Tap once, then a letter, and the
+        // AutoHotkey script on the host catches Meh+letter to launch
+        // apps and snap windows. Win is deliberately excluded — the
+        // bare Win-tap from sticky timeout would otherwise trigger
+        // Start menu / Copilot on this Windows build.
 
         combo_hyper {
             timeout-ms = <40>;
             key-positions = <13 16>;
-            bindings = <&sk LC(LA(LG(LSHIFT)))>;
+            bindings = <&sk LC(LA(LSHIFT))>;
             layers = <BASE>;
         };
     };
@@ -181,7 +182,7 @@
 
         // NOTE: layer node order MUST match the #define indices above.
         // The order here is BASE, SYM, EXT, FNC, SETTINGS (4), MOUSE (5).
-        // Window-snap actions are handled host-side by AHK via Hyper+letter
+        // Window-snap actions are handled host-side by AHK via Meh+letter
         // (see tools/urchin-apps.ahk), no dedicated layer needed.
 
         // Used to change the keyboard's settings.

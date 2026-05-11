@@ -33,7 +33,7 @@ Combos active here:
 - **D+F** → `Alt+Space`
 - **J+K** → `Win+Shift+S` (Snipping Tool screenshot)
 - **X+C** → toggle MOUSE layer
-- **F+J** → sticky Hyper (`Ctrl+Alt+Win+Shift`); next letter is caught by AHK to launch / focus an app
+- **F+J** → sticky Meh (`Ctrl+Alt+Shift`); next letter is caught by AHK to launch / focus an app or snap the active window
 
 ---
 
@@ -96,16 +96,16 @@ Reach: both left thumbs at once.
 
 ## Window snap (host-side via AHK)
 
-Window snapping is no longer a ZMK layer — it's a set of Hyper+letter chords routed by the `urchin-apps.ahk` script. The Hyper combo (F+J) arms `Ctrl+Alt+Win+Shift`, then the next letter fires a pixel-perfect `WinMove`. Robust to resolution / scaling changes, no FancyZones dependency.
+Window snapping is no longer a ZMK layer — it's a set of Meh+letter chords routed by the `urchin-apps.ahk` script. The Meh combo (F+J) arms `Ctrl+Alt+Shift`, then the next letter fires a pixel-perfect `WinMove`. Robust to resolution / scaling changes, no FancyZones dependency.
 
 | Chord | Action |
 |---|---|
-| `Hyper+H` | UW left half |
-| `Hyper+L` | UW right half |
-| `Hyper+M` | UW maximize |
-| `Hyper+N` | ThinkVision (move + maximize) |
-| `Hyper+I` | Top-center 1/3 × 1/3 box on UW |
-| `Hyper+R` | Bottom-center 1920×1080 (Teams share-friendly) on UW |
+| `Meh+H` | UW left half |
+| `Meh+L` | UW right half |
+| `Meh+M` | UW maximize |
+| `Meh+N` | ThinkVision (move + maximize) |
+| `Meh+I` | Top-center 1/3 × 1/3 box on UW |
+| `Meh+R` | Bottom-center 1920×1080 (Teams share-friendly) on UW |
 
 Usage: tap **F+J**, then a letter.
 
@@ -143,7 +143,7 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 | **Top-center 1/3 box on UW** | tap `F+J`, then `I` |
 | **Teams share 1920×1080 box** | tap `F+J`, then `R` |
 | **Mouse mode on/off** | tap `X+C` (BASE) |
-| **Launch app (Hyper)** | tap `F+J`, then a letter (B/E/F/T/C/W/X by default) |
+| **Launch app (Meh)** | tap `F+J`, then a letter (B/E/F/T/C/W/X by default) |
 | **`Alt+Space`** (FZ cycle) | `D+F` (BASE) |
 | **Recover from stuck modifier** | both left thumbs → SETTINGS, press position 7 |
 | **Switch BT profile** | both left thumbs → SETTINGS, `BT0..BT5` keys |
