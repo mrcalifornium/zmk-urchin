@@ -25,7 +25,7 @@ If step 1 fails: combo timeouts are too generous → tighten `combo_screenshot` 
 
 ## 3. BLE snappiness — the backspace fix
 
-- [ ] Hold left-outer thumb to enter EXT, then mash `BSPC` (position 16, where `J` sits) rapidly 20 times. No drops, no missed presses.
+- [ ] Hold left-outer thumb to enter EXT, then mash `BSPC` (position 26, where `M` sits) rapidly 20 times. No drops, no missed presses.
 - [ ] Same test from the SYM layer using `&kp MINUS` (or any rapid-repeat key) for 20 presses.
 - [ ] Walk 3 metres from the host and repeat above. Should still feel solid.
 
@@ -37,17 +37,19 @@ If still missing keys: layer-release race (you're releasing the EXT thumb before
 - [ ] Cancel with `Esc`.
 - [ ] Repeat 3 more times to confirm reliability.
 
-## 5. Window snap — WIN layer
+## 5. Window snap — Meh+letter via AHK
 
-Set up: open a window on the ultrawide.
+Set up: open a window on the ultrawide. `urchin-apps.ahk` must be running.
 
-- [ ] Hold left-outer thumb (EXT), squeeze `S+D`, then press `←` → window snaps to UW left zone.
-- [ ] Same gesture, press `→` → window snaps to UW right zone.
-- [ ] Same gesture, press `↑` → window maximizes on the ultrawide.
-- [ ] Same gesture, press `↓` → window moves to thinkvision and fills it.
-- [ ] With the window now on thinkvision, repeat S+D + `↓` → window cycles back to UW left.
+- [ ] Tap `F+J`, then `H` → window snaps to UW left half (exactly half the UW width).
+- [ ] Tap `F+J`, then `L` → UW right half.
+- [ ] Tap `F+J`, then `M` → maximizes on UW.
+- [ ] Tap `F+J`, then `V` → window moves to ThinkVision and maximizes there.
+- [ ] From ThinkVision, `F+J`, then `M` → returns to UW and maximizes.
+- [ ] Tap `F+J`, then `I` → small box top-center of UW (~1/3 × 1/3).
+- [ ] Tap `F+J`, then `S` → bottom-center 1920×1080 box (Teams share rectangle).
 
-If `↓` doesn't reach the thinkvision: the macro uses `Win+Shift+→`. If your monitor adjacency makes `Win+Shift+←` go there instead, both should still cycle, but if neither works, check Windows Display Settings → arrange monitors physically.
+If nothing happens: AHK script not running. Tray → AutoHotkey icon should be visible. If wrong monitor for V: open `tools/urchin-apps.ahk` and swap which `GetMonitor()` index is 1 vs 2.
 
 ## 6. Mouse layer
 

@@ -64,7 +64,6 @@ Right-hand columns: `[ 8 (` and `] 9 )` line up so opens-on-top, closes-on-botto
 `s*` = sticky modifier (`&sk`). HYP = `Hyper` = LA+LC+LG+LS, useful for unique app shortcuts.
 
 Combos active here:
-- **S+D** → enter WIN layer (held)
 
 ---
 
@@ -100,16 +99,20 @@ Window snapping is no longer a ZMK layer — it's a set of Meh+letter chords rou
 
 | Chord | Action |
 |---|---|
-App letters: `B` Edge personal, `C` Claude, `E` Edge work, `F` Explorer, `N` OneNote, `O` Outlook, `R` Calculator, `T` Teams, `W` Word, `X` Excel.
+App letters: `B` Edge personal, `C` Claude, `E` Edge work, `F` Explorer, `M` Outlook, `N` OneNote, `R` Calculator, `S` Excel, `T` Teams, `W` Word.
 
-Window snap letters:
+Audio: `H` Jabra headset, `D` SMSL DAC.
 
-| `Meh+H` | UW left half |
+Window snap letters — `U I O` top row, `J K L` home row on the right hand:
+
+| `Meh+U` | UW maximize |
+| `Meh+I` | top-center box on UW — 1/3 width, 1/2 height |
+| `Meh+O` | bottom-center 1920×1080 (Teams share-friendly) on UW |
+| `Meh+J` | UW left half |
+| `Meh+K` | ThinkVision (move + maximize) |
 | `Meh+L` | UW right half |
-| `Meh+M` | UW maximize |
-| `Meh+V` | ThinkVision (move + maximize) |
-| `Meh+I` | Top-center 1/3 × 1/3 box on UW |
-| `Meh+S` | Bottom-center 1920×1080 (Teams share-friendly) on UW |
+
+Other: `Meh+X` closes the active window (Alt+F4).
 
 Usage: tap **F+J**, then a letter.
 
@@ -138,16 +141,18 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 
 | Want | Do this |
 |---|---|
-| **Backspace** | hold LO (EXT), press `J` position |
+| **Backspace** | hold LO (EXT), press `M` position |
 | **Screenshot** | `J+K` (BASE) |
-| **Send window to UW left** | tap `F+J`, then `H` |
+| **Send window to UW left** | tap `F+J`, then `J` |
 | **Send window to UW right** | tap `F+J`, then `L` |
-| **Maximize window** | tap `F+J`, then `M` |
-| **Send window to thinkvision** | tap `F+J`, then `V` |
-| **Top-center 1/3 box on UW** | tap `F+J`, then `I` |
-| **Teams share 1920×1080 box** | tap `F+J`, then `S` |
+| **Maximize window** | tap `F+J`, then `U` |
+| **Send window to thinkvision** | tap `F+J`, then `K` |
+| **Top box on UW** | tap `F+J`, then `I` |
+| **Teams share 1920×1080 box** | tap `F+J`, then `O` |
+| **Close window** | tap `F+J`, then `X` |
+| **Switch audio** | tap `F+J`, then `H` (Jabra) / `D` (SMSL) |
 | **Mouse mode on/off** | tap `X+C` (BASE) |
-| **Launch app (Meh)** | tap `F+J`, then a letter (B/C/E/F/N/O/R/T/W/X) |
+| **Launch app (Meh)** | tap `F+J`, then a letter (B/C/E/F/M/N/R/S/T/W) |
 | **`Alt+Space`** (FZ cycle) | `D+F` (BASE) |
 | **Recover from stuck modifier** | both left thumbs → SETTINGS, press position 7 |
 | **Switch BT profile** | both left thumbs → SETTINGS, `BT0..BT5` keys |

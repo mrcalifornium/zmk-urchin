@@ -177,10 +177,17 @@
 
   /* Cheat sheet section */
   .lower {
-    margin-top: 12px;
+    margin-top: 14px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+  }
+  .lower .card h2 { font-size: 12px; }
+  .lower .card table { font-size: 12px; }
+  .lower .card th, .lower .card td { padding: 4px 6px; }
+  .icon { font-size: 15px; line-height: 1; }
+  @media print {
+    .lower { page-break-before: always; break-before: page; }
   }
   .card {
     background: var(--panel-2);
@@ -237,6 +244,7 @@
   <header>
     <h1>Urchin · one-page manual</h1>
     <div class="tag">36-key split · ZMK · BLE</div>
+
   </header>
 
   <!-- BASE -->
@@ -371,26 +379,26 @@
     </div>
   </div>
 
-  <!-- Window snap (via AHK, no ZMK layer) -->
+  <!-- F+J leader actions (host-side via AHK, not a ZMK layer) -->
   <div class="layer">
-    <div class="layer-label ll-win">Win<span class="how">F+J then a letter (AHK)</span></div>
+    <div class="layer-label ll-win">F+J<span class="how">tap F+J, then a key · <b style="color:var(--ext)">green</b>=app <b style="color:var(--win)">pink</b>=window <b style="color:var(--mou)">teal</b>=audio</span></div>
     <div class="kb">
       <div class="half left">
         <div class="rows">
           <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="b">S</div><div class="l small">share</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c2"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="b">V</div><div class="l small">→TV</div></div></div>
-          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key hl-ext"><div class="b">W</div><div class="l small">Word</div></div><div class="key hl-ext"><div class="b">S</div><div class="l small">Excel</div></div><div class="key hl-win"><div class="b">X</div><div class="l small">close</div></div></div>
+          <div class="col c2"><div class="key hl-ext"><div class="b">E</div><div class="l tiny">Edge wk</div></div><div class="key hl-mou"><div class="b">D</div><div class="l small">DAC</div></div><div class="key hl-ext"><div class="b">C</div><div class="l small">Claude</div></div></div>
+          <div class="col c3"><div class="key hl-ext"><div class="b">R</div><div class="l small">calc</div></div><div class="key hl-ext"><div class="b">F</div><div class="l small">files</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key hl-ext"><div class="b">T</div><div class="l small">Teams</div></div><div class="key t"><div class="l">·</div></div><div class="key hl-ext"><div class="b">B</div><div class="l tiny">Edge pers</div></div></div>
         </div>
         <div class="thumbs left"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
       </div>
       <div class="half right">
         <div class="rows">
-          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="b">H</div><div class="l small">L½</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c3"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="b">M</div><div class="l small">max</div></div></div>
-          <div class="col c2"><div class="key hl-win"><div class="b">I</div><div class="l small">top⅓</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
-          <div class="col c1"><div class="key t"><div class="l">·</div></div><div class="key hl-win"><div class="b">L</div><div class="l small">R½</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c4"><div class="key t"><div class="l">·</div></div><div class="key hl-mou"><div class="b">H</div><div class="l small">Jabra</div></div><div class="key hl-ext"><div class="b">N</div><div class="l tiny">OneNote</div></div></div>
+          <div class="col c3"><div class="key hl-win"><div class="b">U</div><div class="l small">max</div></div><div class="key hl-win"><div class="b">J</div><div class="l small">L½</div></div><div class="key hl-ext"><div class="b">M</div><div class="l tiny">Outlook</div></div></div>
+          <div class="col c2"><div class="key hl-win"><div class="b">I</div><div class="l tiny">top box</div></div><div class="key hl-win"><div class="b">K</div><div class="l small">→TV</div></div><div class="key t"><div class="l">·</div></div></div>
+          <div class="col c1"><div class="key hl-win"><div class="b">O</div><div class="l small">share</div></div><div class="key hl-win"><div class="b">L</div><div class="l small">R½</div></div><div class="key t"><div class="l">·</div></div></div>
           <div class="col c0"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
         </div>
         <div class="thumbs right"><div class="key t"><div class="l">·</div></div><div class="key t"><div class="l">·</div></div></div>
@@ -463,22 +471,41 @@
         <tr><td>EXT</td><td>hold left outer thumb</td></tr>
         <tr><td>FNC</td><td>both outer thumbs</td></tr>
         <tr><td>SET</td><td>both left thumbs</td></tr>
-        <tr><td>WIN</td><td>EXT + <kbd>S</kbd>+<kbd>D</kbd></td></tr>
         <tr><td>MOUSE</td><td>tap <kbd>X</kbd>+<kbd>C</kbd></td></tr>
+        <tr><td>Meh (AHK)</td><td>tap <kbd>F</kbd>+<kbd>J</kbd></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>F+J → letter</h2>
+      <table>
+        <tr><td><kbd>B</kbd></td><td><span class="icon">🏠</span> personal browser <small>(slot 8)</small></td></tr>
+        <tr><td><kbd>E</kbd></td><td><span class="icon">💼</span> work browser <small>(slot 7)</small></td></tr>
+        <tr><td><kbd>M</kbd></td><td><span class="icon">✉️</span> Outlook <small>(Mail)</small></td></tr>
+        <tr><td><kbd>T</kbd></td><td><span class="icon">👥</span> Teams (new)</td></tr>
+        <tr><td><kbd>N</kbd></td><td><span class="icon">📓</span> OneNote</td></tr>
+        <tr><td><kbd>C</kbd></td><td><span class="icon">✨</span> Claude</td></tr>
+        <tr><td><kbd>F</kbd></td><td><span class="icon">📁</span> File Explorer</td></tr>
+        <tr><td><kbd>R</kbd></td><td><span class="icon">🧮</span> Calculator</td></tr>
+        <tr><td><kbd>W</kbd></td><td><span class="icon">📄</span> Word</td></tr>
+        <tr><td><kbd>S</kbd></td><td><span class="icon">📊</span> Excel</td></tr>
+        <tr><td><kbd>X</kbd></td><td><span class="icon">❌</span> close window <small>(Alt+F4)</small></td></tr>
+        <tr><td><kbd>H</kbd></td><td><span class="icon">🎧</span> audio → Jabra headset</td></tr>
+        <tr><td><kbd>D</kbd></td><td><span class="icon">🔊</span> audio → SMSL DAC</td></tr>
       </table>
     </div>
     <div class="card">
       <h2>Common tasks</h2>
       <table>
-        <tr><td>Backspace</td><td>EXT + <kbd>J</kbd> pos.</td></tr>
+        <tr><td>Backspace</td><td>EXT + <kbd>M</kbd> pos.</td></tr>
         <tr><td>Snip screenshot</td><td><kbd>J</kbd>+<kbd>K</kbd></td></tr>
         <tr><td>FZ cycle</td><td><kbd>D</kbd>+<kbd>F</kbd></td></tr>
-        <tr><td>Send to thinkvision</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>V</kbd></td></tr>
-        <tr><td>Maximize on UW</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>M</kbd></td></tr>
-        <tr><td>UW left / right half</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>H</kbd> / <kbd>L</kbd></td></tr>
-        <tr><td>Teams share box</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>S</kbd></td></tr>
+        <tr><td>Send to thinkvision</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>K</kbd></td></tr>
+        <tr><td>Maximize on UW</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>U</kbd></td></tr>
+        <tr><td>UW left / right half</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>J</kbd> / <kbd>L</kbd></td></tr>
+        <tr><td>Top box / share box</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>I</kbd> / <kbd>O</kbd></td></tr>
+        <tr><td>Close window</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>X</kbd></td></tr>
         <tr><td>Mouse on/off</td><td><kbd>X</kbd>+<kbd>C</kbd></td></tr>
-        <tr><td>Launch app</td><td><kbd>F</kbd>+<kbd>J</kbd> → letter (AHK)</td></tr>
+        <tr><td>Switch audio</td><td><kbd>F</kbd>+<kbd>J</kbd> → <kbd>H</kbd> / <kbd>D</kbd></td></tr>
       </table>
     </div>
     <div class="card">

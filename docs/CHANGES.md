@@ -40,16 +40,9 @@ Added window-snap, mouse, and one-hand screenshot capabilities. Tuned wireless r
 
 ### New layers
 
-**WIN (5)** — entered while EXT is held by chording S+D. Right-hand arrows snap windows:
+The WIN layer was initially added (S+D combo on EXT + arrows fire Win-key window-snap shortcuts) but later removed because it was fragile (sticky-mod timing + FancyZones quirks). Window snapping is now host-side via AHK — see "Meh + AHK" below.
 
-| Key | Action |
-|---|---|
-| `←` | `Win+Ctrl+Alt+1` (UW left zone) |
-| `→` | `Win+Ctrl+Alt+2` (UW right zone) |
-| `↑` | `Win+Up` (maximize current monitor) |
-| `↓` | `snap_to_other` macro (cycle to other monitor + zone 1) |
-
-**MOUSE (6)** — toggled by tapping X+C. All other keys remain `&trans`.
+**MOUSE (5)** — toggled by tapping X+C. All other keys remain `&trans`.
 
 | Key | Action |
 |---|---|
@@ -85,12 +78,12 @@ The previous ZMK WIN layer (S+D combo + arrows fires Win-arrow snap) was fragile
 
 - `F+J` combo on base fires sticky Meh (`Ctrl+Alt+Shift`). Win is deliberately excluded — when a sticky chord including Win times out without a follow-up letter, the bare Win-tap triggers Start menu / Copilot on Windows 11.
 - [tools/urchin-apps.ahk](../tools/urchin-apps.ahk) catches Meh+letter on the host and routes:
-  - **Apps** (focus-or-launch): B browser, E Outlook, F Explorer, T Terminal, C VS Code, W Word, X Excel.
-  - **Window snaps** (pixel-perfect `WinMove` from `MonitorGetWorkArea`):
-    - H = UW left half, L = UW right half, M = UW maximize
-    - N = ThinkVision maximize
-    - I = top-center 1/3 × 1/3 on UW
-    - R = bottom-center 1920×1080 on UW (Teams share-friendly)
+  - **Apps** (focus-or-launch, or `Win+N` for the browser slots): B personal browser (taskbar slot 8), E work browser (taskbar slot 7), C Claude, F Explorer, M new Outlook, N OneNote, R Calculator, S Excel, T new Teams, W Word.
+  - **Window snaps** (pixel-perfect `WinMove` from `MonitorGetWorkArea`) — a `U I O / J K L` cluster on the right hand:
+    - U = UW maximize, I = top-center box (1/3 width × 1/2 height), O = bottom-center 1920×1080 (Teams share-friendly)
+    - J = UW left half, K = ThinkVision maximize, L = UW right half
+  - **Audio output** (via SoundVolumeView): H = Jabra headset, D = SMSL DAC.
+  - **X** = close active window (Alt+F4).
 
 Pure AHK, no FancyZones dependency. Robust to resolution / scaling changes.
 

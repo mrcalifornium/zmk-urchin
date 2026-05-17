@@ -18,6 +18,10 @@
 
 LOCALAPPDATA := EnvGet("LOCALAPPDATA")
 
+; SoundVolumeView (NirSoft) — used for audio output device switching.
+; Update this path if you move the exe.
+SVV := '"C:\Users\aleks\Downloads\apps\soundvolumeview-x64\SoundVolumeView.exe"'
+
 ; Helper: focus existing window if it exists, otherwise launch it.
 ; Handles tray-minimized / hidden windows (Teams, Outlook, etc.
 ; "close to tray" leaves the window hidden — default WinExist doesn't
@@ -61,8 +65,13 @@ TaskbarSlot(slot) {
 ;     taskbar from the left, counting only pinned items.)
 ^!+b::TaskbarSlot(8)
 
-; C = Claude desktop
-^!+c::ActivateOrLaunch("ahk_exe claude.exe", LOCALAPPDATA "\AnthropicClaude\claude.exe")
+; C = Claude desktop (Microsoft Store install)
+; Launched via Windows AUMID (App User Model ID) instead of a path,
+; since MSIX install dirs contain a version number that changes on
+; every Store update. AUMID is stable.
+; To find your AUMID if it ever changes:
+;   Get-StartApps | Where-Object { $_.Name -like "*Claude*" }
+^!+c::ActivateOrLaunch("ahk_exe Claude.exe", "shell:AppsFolder\Claude_pzs8sxrjxfjjc!Claude")
 
 ; E = Work browser at taskbar slot 7 (Edge with work profile pinned
 ;     in position 7 of the taskbar from the left.)
@@ -74,8 +83,8 @@ TaskbarSlot(slot) {
 ; N = OneNote
 ^!+n::ActivateOrLaunch("ahk_exe ONENOTE.EXE", "onenote.exe")
 
-; O = Outlook (new)
-^!+o::ActivateOrLaunch("ahk_exe olk.exe", "olk.exe")
+; M = Outlook (new) — "Mail". Moved off O so O can be a window snap.
+^!+m::ActivateOrLaunch("ahk_exe olk.exe", "olk.exe")
 
 ; R = Calculator
 ^!+r::ActivateOrLaunch("Calculator", "calc.exe")
@@ -86,8 +95,13 @@ TaskbarSlot(slot) {
 ; W = Word
 ^!+w::ActivateOrLaunch("ahk_exe WINWORD.EXE", "winword.exe")
 
-; X = Excel
-^!+x::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
+; S = Excel ("Spreadsheet"). Moved off X so X can close windows.
+^!+s::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
+
+; X = close active window (Alt+F4).
+; Release the sticky-Meh modifiers first so the host sees a clean
+; Alt+F4, not Ctrl+Alt+Shift+F4.
+^!+x::SendInput("{LCtrl up}{LAlt up}{LShift up}!{F4}")
 
 ; ─── Window snap helpers ─────────────────────────────────────────────
 ; Pixel-perfect WinMove based on MonitorGetWorkArea — robust to
@@ -119,19 +133,28 @@ SnapToMonitor(idx) {
 }
 
 ; ─── Meh + letter window snap bindings ──────────────────────────────
+; Right-hand cluster — U I O on top row, J K L on home row:
+;   U = maximize UW   I = top-mid box   O = share box
+;   J = left half     K = ThinkVision   L = right half
 
-; H = UW left half
-^!+h::{
-    m := GetMonitor(1)
-    SnapTo(m.left, m.top, m.width / 2, m.height)
-}
+; U = maximize on the ultrawide
+^!+u::SnapToMonitor(1)
 
-; I = top-center 1/3 × 1/3 box on UW
+; I = top-center box on UW — 1/3 width, 1/2 height
 ^!+i::{
     m := GetMonitor(1)
     w := m.width / 3
-    h := m.height / 3
+    h := m.height / 2
     SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
+}
+
+; K = ThinkVision (lower screen) maximize
+^!+k::SnapToMonitor(2)
+
+; J = UW left half
+^!+j::{
+    m := GetMonitor(1)
+    SnapTo(m.left, m.top, m.width / 2, m.height)
 }
 
 ; L = UW right half
@@ -140,19 +163,28 @@ SnapToMonitor(idx) {
     SnapTo(m.left + m.width / 2, m.top, m.width / 2, m.height)
 }
 
-; M = UW maximize
-^!+m::SnapToMonitor(1)
-
-; S = bottom-center 1920×1080 box on UW (Teams share-friendly)
-^!+s::{
+; O = bottom-center 1920×1080 box on UW (Teams share-friendly)
+^!+o::{
     m := GetMonitor(1)
     w := 1920
     h := 1080
     SnapTo(m.left + (m.width - w) / 2, m.top + m.height - h, w, h)
 }
 
-; V = ThinkVision maximize
-^!+v::SnapToMonitor(2)
+; ─── Meh + letter audio output switching ────────────────────────────
+; Sets the default playback device (all roles: Console, Multimedia,
+; Communications) via SoundVolumeView. Device IDs are the
+; "Command-Line Friendly ID" from SoundVolumeView's GUI.
+
+SetAudio(deviceId) {
+    Run(SVV ' /SetDefault "' deviceId '" all')
+}
+
+; H = Jabra headset — "Headset". Moved off J so J can be a window snap.
+^!+h::SetAudio("Jabra Engage 75\Device\Headset Earphone\Render")
+
+; D = SMSL iDea DAC
+^!+d::SetAudio("3- SMSL iDea v1.2\Device\Speakers\Render")
 
 ; ─── Tray ────────────────────────────────────────────────────────────
-A_IconTip := "Urchin app launcher + window snaps"
+A_IconTip := "Urchin app launcher + window snaps + audio"
