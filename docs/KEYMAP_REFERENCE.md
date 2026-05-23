@@ -103,10 +103,10 @@ App letters: `B` Edge personal, `C` Claude, `E` Edge work, `F` Explorer, `M` Out
 
 Audio: `H` Jabra headset, `D` SMSL DAC.
 
-Window snap letters — `U I O` top row, `J K L` home row on the right hand:
+Window snap letters — `Y I O` top row, `J K L` home row on the right hand:
 
-| `Meh+U` | UW maximize |
-| `Meh+I` | top-center box on UW — 1/3 width, 1/2 height |
+| `Meh+I` | UW maximize |
+| `Meh+Y` | middle box on UW — 1/3 width × 1/2 height, centered both axes |
 | `Meh+O` | bottom-center 1920×1080 (Teams share-friendly) on UW |
 | `Meh+J` | UW left half |
 | `Meh+K` | ThinkVision (move + maximize) |
@@ -145,9 +145,9 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 | **Screenshot** | `J+K` (BASE) |
 | **Send window to UW left** | tap `F+J`, then `J` |
 | **Send window to UW right** | tap `F+J`, then `L` |
-| **Maximize window** | tap `F+J`, then `U` |
+| **Maximize window** | tap `F+J`, then `I` |
 | **Send window to thinkvision** | tap `F+J`, then `K` |
-| **Top box on UW** | tap `F+J`, then `I` |
+| **Middle box on UW** | tap `F+J`, then `Y` |
 | **Teams share 1920×1080 box** | tap `F+J`, then `O` |
 | **Close window** | tap `F+J`, then `X` |
 | **Switch audio** | tap `F+J`, then `H` (Jabra) / `D` (SMSL) |

@@ -79,8 +79,8 @@ The previous ZMK WIN layer (S+D combo + arrows fires Win-arrow snap) was fragile
 - `F+J` combo on base fires sticky Meh (`Ctrl+Alt+Shift`). Win is deliberately excluded — when a sticky chord including Win times out without a follow-up letter, the bare Win-tap triggers Start menu / Copilot on Windows 11.
 - [tools/urchin-apps.ahk](../tools/urchin-apps.ahk) catches Meh+letter on the host and routes:
   - **Apps** (focus-or-launch, or `Win+N` for the browser slots): B personal browser (taskbar slot 8), E work browser (taskbar slot 7), C Claude, F Explorer, M new Outlook, N OneNote, R Calculator, S Excel, T new Teams, W Word.
-  - **Window snaps** (pixel-perfect `WinMove` from `MonitorGetWorkArea`) — a `U I O / J K L` cluster on the right hand:
-    - U = UW maximize, I = top-center box (1/3 width × 1/2 height), O = bottom-center 1920×1080 (Teams share-friendly)
+  - **Window snaps** (pixel-perfect `WinMove` from `MonitorGetWorkArea`) — a `Y I O / J K L` cluster on the right hand:
+    - I = UW maximize, Y = middle box (1/3 width × 1/2 height, centered both axes), O = bottom-center 1920×1080 (Teams share-friendly)
     - J = UW left half, K = ThinkVision maximize, L = UW right half
   - **Audio output** (via SoundVolumeView): H = Jabra headset, D = SMSL DAC.
   - **X** = close active window (Alt+F4).

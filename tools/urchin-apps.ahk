@@ -133,19 +133,19 @@ SnapToMonitor(idx) {
 }
 
 ; ─── Meh + letter window snap bindings ──────────────────────────────
-; Right-hand cluster — U I O on top row, J K L on home row:
-;   U = maximize UW   I = top-mid box   O = share box
-;   J = left half     K = ThinkVision   L = right half
+; Right-hand cluster — Y I O on top row, J K L on home row:
+;   Y = middle box   I = maximize UW   O = share box
+;   J = left half    K = ThinkVision   L = right half
 
-; U = maximize on the ultrawide
-^!+u::SnapToMonitor(1)
+; I = maximize on the ultrawide
+^!+i::SnapToMonitor(1)
 
-; I = top-center box on UW — 1/3 width, 1/2 height
-^!+i::{
+; Y = middle box on UW — 1/3 width, 1/2 height, centered both axes
+^!+y::{
     m := GetMonitor(1)
     w := m.width / 3
     h := m.height / 2
-    SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
+    SnapTo(m.left + (m.width - w) / 2, m.top + (m.height - h) / 2, w, h)
 }
 
 ; K = ThinkVision (lower screen) maximize
