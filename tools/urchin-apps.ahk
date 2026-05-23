@@ -140,12 +140,12 @@ SnapToMonitor(idx) {
 ; I = maximize on the ultrawide
 ^!+i::SnapToMonitor(1)
 
-; Y = middle box on UW — 1/3 width, 1/2 height, centered both axes
+; Y = top-center box on UW — 1/3 width, 1/2 height, anchored to top
 ^!+y::{
     m := GetMonitor(1)
     w := m.width / 3
     h := m.height / 2
-    SnapTo(m.left + (m.width - w) / 2, m.top + (m.height - h) / 2, w, h)
+    SnapTo(m.left + (m.width - w) / 2, m.top, w, h)
 }
 
 ; K = ThinkVision (lower screen) maximize
