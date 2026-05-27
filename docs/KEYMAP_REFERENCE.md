@@ -99,9 +99,11 @@ Window snapping is no longer a ZMK layer — it's a set of Meh+letter chords rou
 
 | Chord | Action |
 |---|---|
-App letters: `B` Edge personal, `C` Claude, `E` Edge work, `F` Explorer, `M` Outlook, `N` OneNote, `R` Calculator, `S` Excel, `T` Teams, `W` Word.
+App letters: `B` Edge personal, `C` Claude, `E` Edge work, `F` Explorer, `M` Outlook, `N` OneNote, `P` PowerPoint, `R` Calculator, `S` Excel, `T` Teams, `W` Word.
 
-Audio: `H` Jabra headset, `D` SMSL DAC.
+Audio output: `H` Jabra headset, `D` SMSL DAC.
+
+Volume (left pinky column): `Q` up, `A` down, `Z` mute.
 
 Window snap letters — `U I O` top row, `J K L` home row on the right hand:
 
@@ -152,7 +154,8 @@ Reach: tap `X+C` to toggle on. Tap again to exit.
 | **Close window** | tap `F+J`, then `X` |
 | **Switch audio** | tap `F+J`, then `H` (Jabra) / `D` (SMSL) |
 | **Mouse mode on/off** | tap `X+C` (BASE) |
-| **Launch app (Meh)** | tap `F+J`, then a letter (B/C/E/F/M/N/R/S/T/W) |
+| **Launch app (Meh)** | tap `F+J`, then a letter (B/C/E/F/M/N/P/R/S/T/W) |
+| **Volume up / down / mute** | tap `F+J`, then `Q` / `A` / `Z` |
 | **`Alt+Space`** (FZ cycle) | `D+F` (BASE) |
 | **Recover from stuck modifier** | both left thumbs → SETTINGS, press position 7 |
 | **Switch BT profile** | both left thumbs → SETTINGS, `BT0..BT5` keys |

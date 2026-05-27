@@ -83,7 +83,8 @@ The previous ZMK WIN layer (S+D combo + arrows fires Win-arrow snap) was fragile
     - I = UW maximize, U = top-center box (1/3 width × 1/2 height, anchored to top), O = bottom-center 1920×1080 (Teams share-friendly)
     - J = UW left half, K = ThinkVision maximize, L = UW right half
   - **Audio output** (via SoundVolumeView): H = Jabra headset, D = SMSL DAC.
-  - **X** = close active window (Alt+F4).
+  - **Volume** (left pinky column): Q = up, A = down, Z = mute.
+  - **P** = PowerPoint, **X** = close active window (Alt+F4).
 
 Pure AHK, no FancyZones dependency. Robust to resolution / scaling changes.
 

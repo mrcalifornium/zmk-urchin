@@ -98,6 +98,9 @@ TaskbarSlot(slot) {
 ; S = Excel ("Spreadsheet"). Moved off X so X can close windows.
 ^!+s::ActivateOrLaunch("ahk_exe EXCEL.EXE", "excel.exe")
 
+; P = PowerPoint
+^!+p::ActivateOrLaunch("ahk_exe POWERPNT.EXE", "powerpnt.exe")
+
 ; X = close active window (Alt+F4).
 ; Release the sticky-Meh modifiers first so the host sees a clean
 ; Alt+F4, not Ctrl+Alt+Shift+F4.
@@ -187,6 +190,17 @@ SetAudio(deviceId) {
 
 ; D = SMSL iDea DAC
 ^!+d::SetAudio("3- SMSL iDea v1.2\Device\Speakers\Render")
+
+; ─── Meh + letter volume control (left pinky column) ──────────────
+
+; Q = volume up (left pinky top)
+^!+q::Send("{Volume_Up}")
+
+; A = volume down (left pinky home)
+^!+a::Send("{Volume_Down}")
+
+; Z = mute toggle (left pinky bottom)
+^!+z::Send("{Volume_Mute}")
 
 ; ─── Tray ────────────────────────────────────────────────────────────
 A_IconTip := "Urchin app launcher + window snaps + audio"
