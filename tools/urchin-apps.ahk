@@ -101,6 +101,25 @@ TaskbarSlot(slot) {
 ; P = PowerPoint
 ^!+p::ActivateOrLaunch("ahk_exe POWERPNT.EXE", "powerpnt.exe")
 
+; G = Guide — toggle the keyboard manual as an always-on-top overlay.
+; Opens manual.html in Edge --app mode (frameless app window). Tap
+; the chord again to close. Esc also closes (via a tiny JS snippet
+; in manual.html).
+MANUAL_PATH := "file:///C:/Users/aleks/Productivity/zmk-urchin/docs/manual.html"
+MANUAL_MATCH := "one-page manual ahk_exe msedge.exe"
+
+^!+g::{
+    global MANUAL_PATH, MANUAL_MATCH
+    if hwnd := WinExist(MANUAL_MATCH) {
+        WinClose(hwnd)
+        return
+    }
+    Run('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=' MANUAL_PATH ' --window-size=1280,900')
+    if WinWait(MANUAL_MATCH, , 4) {
+        WinSetAlwaysOnTop(true)
+    }
+}
+
 ; X = close active window (Alt+F4).
 ; Release the sticky-Meh modifiers first so the host sees a clean
 ; Alt+F4, not Ctrl+Alt+Shift+F4.

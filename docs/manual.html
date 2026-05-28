@@ -489,6 +489,7 @@
         <tr><td><kbd>W</kbd></td><td><span class="icon">📄</span> Word</td></tr>
         <tr><td><kbd>S</kbd></td><td><span class="icon">📊</span> Excel</td></tr>
         <tr><td><kbd>P</kbd></td><td><span class="icon">📽️</span> PowerPoint</td></tr>
+        <tr><td><kbd>G</kbd></td><td><span class="icon">📖</span> show this manual overlay <small>(Esc closes)</small></td></tr>
         <tr><td><kbd>X</kbd></td><td><span class="icon">❌</span> close window <small>(Alt+F4)</small></td></tr>
         <tr><td><kbd>H</kbd></td><td><span class="icon">🎧</span> audio → Jabra headset</td></tr>
         <tr><td><kbd>D</kbd></td><td><span class="icon">🔊</span> audio → SMSL DAC</td></tr>
@@ -528,8 +529,15 @@
 
   <footer>
     <span>Highlighted keys = activate or are reachable on a sub-layer.</span>
-    <span>Print A4 · Ctrl+P</span>
+    <span>Print A4 · Ctrl+P · Esc closes overlay</span>
   </footer>
 </div>
+<script>
+  // When opened as an Edge --app window from the F+J → G hotkey,
+  // pressing Esc closes the overlay.
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') window.close();
+  });
+</script>
 </body>
 </html>
