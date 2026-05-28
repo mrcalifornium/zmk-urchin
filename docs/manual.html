@@ -63,12 +63,28 @@
   }
 
   /* Layer block */
+  .layers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px 14px;
+    margin-bottom: 8px;
+  }
   .layer {
-    margin-bottom: 6px;
     display: grid;
     grid-template-columns: 70px 1fr;
     gap: 8px;
     align-items: center;
+  }
+  .layer.full { grid-column: 1 / -1; }
+  /* Wide-screen / overlay layout: maps go 2-up so the whole UW is used */
+  @media (min-width: 1200px) {
+    .layers { grid-template-columns: 1fr 1fr; }
+    .lower  { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+  /* Print stays single column */
+  @media print {
+    .layers { grid-template-columns: 1fr !important; }
+    .lower  { grid-template-columns: 1fr 1fr !important; }
   }
   .layer-label {
     background: var(--accent);
@@ -247,8 +263,9 @@
 
   </header>
 
+  <div class="layers">
   <!-- BASE -->
-  <div class="layer">
+  <div class="layer full">
     <div class="layer-label ll-base">Base<span class="how">always-on</span></div>
     <div class="kb">
       <div class="half left">
@@ -462,6 +479,8 @@
       </div>
     </div>
   </div>
+
+  </div><!-- /.layers -->
 
   <div class="lower">
     <div class="card">
