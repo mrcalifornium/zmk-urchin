@@ -101,23 +101,39 @@ TaskbarSlot(slot) {
 ; P = PowerPoint
 ^!+p::ActivateOrLaunch("ahk_exe POWERPNT.EXE", "powerpnt.exe")
 
-; G = Guide — toggle the keyboard manual as an always-on-top overlay.
-; Opens manual.html in Edge --app mode (frameless app window). Tap
-; the chord again to close. Esc also closes (via a tiny JS snippet
-; in manual.html).
+; G = Guide — toggle the keyboard manual as an always-on-top
+; translucent overlay on the ultrawide, no title bar, 5 px inset
+; from the screen edges. Tap again (or Esc) to close.
 MANUAL_PATH := "file:///C:/Users/aleks/Productivity/zmk-urchin/docs/manual.html"
-MANUAL_MATCH := "one-page manual ahk_exe msedge.exe"
+MANUAL_MATCH := "Urchin"           ; matches the page title prefix
+MANUAL_INSET := 5                  ; gap from screen edges, px
+MANUAL_OPACITY := 230              ; 0..255 (230 ~= 90%)
 
 ^!+g::{
-    global MANUAL_PATH, MANUAL_MATCH
-    if hwnd := WinExist(MANUAL_MATCH) {
-        WinClose(hwnd)
+    global MANUAL_PATH, MANUAL_MATCH, MANUAL_INSET, MANUAL_OPACITY
+    SetTitleMatchMode(2)
+
+    ; Toggle off if already showing
+    if hwnd := WinExist(MANUAL_MATCH " ahk_exe msedge.exe") {
+        try WinClose(hwnd)
         return
     }
-    Run('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=' MANUAL_PATH ' --window-size=1280,900')
-    if WinWait(MANUAL_MATCH, , 4) {
-        WinSetAlwaysOnTop(true)
-    }
+
+    ; Launch
+    Run('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=' MANUAL_PATH)
+    if !hwnd := WinWait(MANUAL_MATCH " ahk_exe msedge.exe", , 4)
+        return
+
+    ; Strip the title bar + thick frame for a clean overlay look
+    ; (WS_CAPTION 0xC00000 | WS_THICKFRAME 0x40000 = 0xC40000)
+    WinSetStyle("-0xC40000", hwnd)
+
+    ; Maximize on UW (monitor 1) with the requested edge inset
+    m := GetMonitor(1)
+    WinMove(m.left + MANUAL_INSET, m.top + MANUAL_INSET,
+            m.width - 2 * MANUAL_INSET, m.height - 2 * MANUAL_INSET, hwnd)
+
+    WinSetAlwaysOnTop(true, hwnd)
 }
 
 ; X = close active window (Alt+F4).

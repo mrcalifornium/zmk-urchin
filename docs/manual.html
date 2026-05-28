@@ -5,43 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Urchin — One-Page Manual</title>
 <style>
+  /* Dark theme by default (overlay viewing). Print media query
+     below switches to a light palette so paper looks right. */
   :root {
-    --bg: #ffffff;
-    --panel: #ffffff;
-    --panel-2: #f7f8fa;
-    --border: #d0d4dc;
-    --border-soft: #e3e6ec;
-    --text: #1a1d23;
-    --muted: #6a7280;
-    --accent: #3056d3;
-    --key-bg: #fafbfc;
-    --key-border: #c8cdd6;
-    --key-text: #1a1d23;
-    --behavior-text: #a7adb8;
+    --bg: #0f1115;
+    --panel: #1a1d23;
+    --panel-2: #252a33;
+    --border: #3a4151;
+    --border-soft: #2a2f3d;
+    --text: #e7e9ee;
+    --muted: #98a0ad;
+    --accent: #7c9cff;
+    --key-bg: #252a33;
+    --key-border: #3a4151;
+    --key-text: #e7e9ee;
+    --behavior-text: #6a7280;
 
     --base: #4a90e2;
-    --sym:  #d97706;
-    --ext:  #16a34a;
-    --fnc:  #9333ea;
-    --set:  #ca8a04;
-    --win:  #db2777;
-    --mou:  #0d9488;
+    --sym:  #f59e0b;
+    --ext:  #22c55e;
+    --fnc:  #a855f7;
+    --set:  #eab308;
+    --win:  #ec4899;
+    --mou:  #14b8a6;
+  }
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --panel-2: #f7f8fa;
+      --border: #d0d4dc;
+      --border-soft: #e3e6ec;
+      --text: #1a1d23;
+      --muted: #6a7280;
+      --accent: #3056d3;
+      --key-bg: #fafbfc;
+      --key-border: #c8cdd6;
+      --key-text: #1a1d23;
+      --behavior-text: #a7adb8;
+      --sym:  #d97706;
+      --ext:  #16a34a;
+      --fnc:  #9333ea;
+      --set:  #ca8a04;
+      --win:  #db2777;
+      --mou:  #0d9488;
+    }
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: #f4f5f7;
+    background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
     padding: 14px;
   }
   .page {
-    max-width: 1040px;
+    max-width: none;
     margin: 0 auto;
-    background: white;
+    background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 16px 20px;
+    padding: 18px 24px;
+  }
+  @media print {
+    body { background: #f4f5f7; }
+    .page { max-width: 1040px; background: white; }
   }
   header {
     display: flex;
@@ -71,11 +99,14 @@
   }
   .layer {
     display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: 8px;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
     align-items: center;
   }
   .layer.full { grid-column: 1 / -1; }
+  @media print {
+    .layer { grid-template-columns: 70px 1fr; gap: 8px; }
+  }
   /* Wide-screen / overlay layout: maps go 2-up so the whole UW is used */
   @media (min-width: 1200px) {
     .layers { grid-template-columns: 1fr 1fr; }
@@ -147,19 +178,19 @@
   .thumbs.right { padding-right: 70px; }
 
   .key {
-    width: 30px;
-    height: 26px;
+    width: 42px;
+    height: 38px;
     border: 1px solid var(--key-border);
-    border-radius: 4px;
+    border-radius: 5px;
     background: var(--key-bg);
     display: flex;
     flex-direction: column;
-    padding: 1px 2px 0;
+    padding: 2px 3px 0;
     position: relative;
     overflow: hidden;
   }
   .key .b {
-    font-size: 6px;
+    font-size: 8px;
     color: var(--behavior-text);
     line-height: 1;
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
@@ -170,14 +201,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--key-text);
     line-height: 1;
     margin-top: -2px;
   }
-  .key .l.small { font-size: 8px; font-weight: 600; }
-  .key .l.tiny { font-size: 7px; font-weight: 600; }
+  .key .l.small { font-size: 11px; font-weight: 600; }
+  .key .l.tiny { font-size: 9px; font-weight: 600; }
+  @media print {
+    .key { width: 30px; height: 26px; padding: 1px 2px 0; }
+    .key .b { font-size: 6px; }
+    .key .l { font-size: 11px; }
+    .key .l.small { font-size: 8px; }
+    .key .l.tiny { font-size: 7px; }
+  }
   .key.t { background: white; border-color: var(--border-soft); }
   .key.t .l { color: #c0c5d0; }
   /* Bound: an assigned action — solid dark fill */
