@@ -22,25 +22,50 @@ LOCALAPPDATA := EnvGet("LOCALAPPDATA")
 ; Update this path if you move the exe.
 SVV := '"C:\Users\aleks\Downloads\apps\soundvolumeview-x64\SoundVolumeView.exe"'
 
-; Helper: focus existing window if it exists, otherwise launch it.
-; Handles tray-minimized / hidden windows (Teams, Outlook, etc.
-; "close to tray" leaves the window hidden — default WinExist doesn't
-; see those, so old launcher always thought the app wasn't running).
+; Helper: bring an app forward if it's running, otherwise launch it
+; into the share-view layout (1920x1080 centered at the bottom of
+; the ultrawide). Running case un-hides tray-minimized + restores
+; minimized + handles Windows' foreground-lock protection by
+; falling back to a minimize/restore cycle if direct activate is
+; refused.
 ActivateOrLaunch(winQuery, runTarget) {
     prevDH := A_DetectHiddenWindows
     DetectHiddenWindows(true)
     try {
         if hwnd := WinExist(winQuery) {
-            try WinShow(hwnd)             ; un-hide if tray-minimized
+            try WinShow(hwnd)
             if WinGetMinMax(hwnd) = -1
-                WinRestore(hwnd)          ; restore if window-minimized
+                WinRestore(hwnd)
             WinActivate(hwnd)
+            Sleep(40)
+            ; If the direct activate was refused by Windows'
+            ; foreground-lock protection, cycle minimize/restore —
+            ; Windows treats that as a legitimate user action.
+            if !WinActive(hwnd) {
+                WinMinimize(hwnd)
+                Sleep(40)
+                WinRestore(hwnd)
+                WinActivate(hwnd)
+            }
             return
         }
     } finally {
         DetectHiddenWindows(prevDH)
     }
+
+    ; Not running — launch and place into the share-view rectangle
     try Run(runTarget)
+    if !hwnd := WinWait(winQuery, , 8)
+        return
+    Sleep(300)  ; give the app a moment to finish creating its window
+    try {
+        WinRestore(hwnd)
+        m := GetMonitor(1)
+        w := 1920
+        h := 1080
+        WinMove(m.left + (m.width - w) / 2, m.top + m.height - h, w, h, hwnd)
+        WinActivate(hwnd)
+    }
 }
 
 ; Forward a Win+<slot> taskbar shortcut to Windows.
