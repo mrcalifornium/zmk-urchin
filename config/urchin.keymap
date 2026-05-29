@@ -22,8 +22,11 @@
 
 &sk {
     // don't release mods on other mods presses
-
     ignore-modifiers;
+
+    // 2 s before a sticky modifier times out — gives time to peek
+    // at the F+J manual overlay before picking an action letter.
+    release-after-ms = <2000>;
 };
 
 / {
