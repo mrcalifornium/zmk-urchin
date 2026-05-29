@@ -171,11 +171,16 @@
 
   .thumbs {
     display: flex;
-    gap: 2px;
-    margin-top: -2px;
+    gap: 3px;
+    margin-top: 2px;
   }
   .thumbs.left { padding-left: 70px; }
   .thumbs.right { padding-right: 70px; }
+  /* Thumbs are physically larger keys — size them up to match. */
+  .thumbs .key { width: 56px; height: 44px; }
+  @media print {
+    .thumbs .key { width: 40px; height: 30px; }
+  }
 
   .key {
     width: 42px;
@@ -216,8 +221,9 @@
     .key .l.small { font-size: 8px; }
     .key .l.tiny { font-size: 7px; }
   }
-  .key.t { background: white; border-color: var(--border-soft); }
-  .key.t .l { color: #c0c5d0; }
+  /* Unused/trans keys: just an outline on the dark background. */
+  .key.t { background: transparent; border-color: var(--border-soft); }
+  .key.t .l { color: var(--muted); opacity: 0.3; }
   /* Bound: an assigned action — solid dark fill */
   .key.bound { background: #1a1d23; border-color: #1a1d23; }
   .key.bound .l { color: white; font-weight: 600; }
@@ -255,14 +261,17 @@
   tr:last-child td { border-bottom: none; }
   td:first-child { white-space: nowrap; color: var(--muted); }
   kbd {
-    background: #eef0f4;
-    border: 1px solid #c8cdd6;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
     border-bottom-width: 2px;
     border-radius: 3px;
     padding: 0px 4px;
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text);
+  }
+  @media print {
+    kbd { background: #eef0f4; border-color: #c8cdd6; font-size: 10px; }
   }
   footer {
     margin-top: 10px;
