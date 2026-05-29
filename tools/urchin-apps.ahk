@@ -119,8 +119,8 @@ MANUAL_OPACITY := 230              ; 0..255 (230 ~= 90%)
         return
     }
 
-    ; Launch
-    Run('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=' MANUAL_PATH)
+    ; Launch at 170% zoom via Chromium device-scale-factor flag
+    Run('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=' MANUAL_PATH ' --force-device-scale-factor=1.7')
     if !hwnd := WinWait(MANUAL_MATCH " ahk_exe msedge.exe", , 4)
         return
 
