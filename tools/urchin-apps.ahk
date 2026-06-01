@@ -114,8 +114,10 @@ TaskbarSlot(slot) {
 ; R = Calculator
 ^!+r::ActivateOrLaunch("Calculator", "calc.exe")
 
-; T = Teams (new)
-^!+t::ActivateOrLaunch("ahk_exe ms-teams.exe", "ms-teams.exe")
+; T = Teams (new) — match by title + exe because Teams runs as two
+; processes (a background ms-teams.exe with no visible window and
+; the main one with "Microsoft Teams" in its window title).
+^!+t::ActivateOrLaunch("Microsoft Teams ahk_exe ms-teams.exe", "ms-teams.exe")
 
 ; W = Word
 ^!+w::ActivateOrLaunch("ahk_exe WINWORD.EXE", "winword.exe")
