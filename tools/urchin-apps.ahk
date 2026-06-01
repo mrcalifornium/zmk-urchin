@@ -252,14 +252,27 @@ SetAudio(deviceId) {
 ^!+d::SetAudio("3- SMSL iDea v1.2\Device\Speakers\Render")
 
 ; ─── Meh + letter volume control (left pinky column) ──────────────
+; Rate-limited so holding Q or A ramps gently instead of shooting
+; up/down 10% in half a second.
+
+VOLUME_DEBOUNCE_MS := 200
+lastVolumeAt := 0
+VolumeStep(virtualKey) {
+    global VOLUME_DEBOUNCE_MS, lastVolumeAt
+    now := A_TickCount
+    if (now - lastVolumeAt < VOLUME_DEBOUNCE_MS)
+        return
+    lastVolumeAt := now
+    Send(virtualKey)
+}
 
 ; Q = volume up (left pinky top)
-^!+q::Send("{Volume_Up}")
+^!+q::VolumeStep("{Volume_Up}")
 
 ; A = volume down (left pinky home)
-^!+a::Send("{Volume_Down}")
+^!+a::VolumeStep("{Volume_Down}")
 
-; Z = mute toggle (left pinky bottom)
+; Z = mute toggle (left pinky bottom) — not debounced, only one tap matters
 ^!+z::Send("{Volume_Mute}")
 
 ; ─── Tray ────────────────────────────────────────────────────────────
