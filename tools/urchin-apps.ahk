@@ -22,12 +22,40 @@ LOCALAPPDATA := EnvGet("LOCALAPPDATA")
 ; Update this path if you move the exe.
 SVV := '"C:\Users\aleks\Downloads\apps\soundvolumeview-x64\SoundVolumeView.exe"'
 
+; Canonical Windows trick to force a window to the foreground even
+; when foreground-lock protection (SPI_SETFOREGROUNDLOCKTIMEOUT)
+; would normally refuse WinActivate. Attaches our input thread to
+; the current-foreground window's thread, calls the low-level
+; ShowWindow + SetForegroundWindow + SetFocus, then detaches.
+; Works on apps that resist WinActivate (Teams "close to tray",
+; some Electron windows, etc.).
+ForceForeground(hwnd) {
+    if !hwnd
+        return
+    DllCall("ShowWindow", "Ptr", hwnd, "Int", 9)            ; SW_RESTORE
+    targetTid := DllCall("GetWindowThreadProcessId", "Ptr", hwnd, "UInt*", 0)
+    fgHwnd    := DllCall("GetForegroundWindow", "Ptr")
+    fgTid     := DllCall("GetWindowThreadProcessId", "Ptr", fgHwnd, "UInt*", 0)
+    thisTid   := DllCall("GetCurrentThreadId")
+    attached1 := (thisTid != fgTid)
+        ? DllCall("AttachThreadInput", "UInt", thisTid, "UInt", fgTid, "Int", true)
+        : 0
+    attached2 := (targetTid != fgTid && targetTid != thisTid)
+        ? DllCall("AttachThreadInput", "UInt", targetTid, "UInt", fgTid, "Int", true)
+        : 0
+    DllCall("BringWindowToTop", "Ptr", hwnd)
+    DllCall("SetForegroundWindow", "Ptr", hwnd)
+    DllCall("SetFocus", "Ptr", hwnd)
+    if attached1
+        DllCall("AttachThreadInput", "UInt", thisTid, "UInt", fgTid, "Int", false)
+    if attached2
+        DllCall("AttachThreadInput", "UInt", targetTid, "UInt", fgTid, "Int", false)
+}
+
 ; Helper: bring an app forward if it's running, otherwise launch it
 ; into the share-view layout (1920x1080 centered at the bottom of
 ; the ultrawide). Running case un-hides tray-minimized + restores
-; minimized + handles Windows' foreground-lock protection by
-; falling back to a minimize/restore cycle if direct activate is
-; refused.
+; minimized + uses ForceForeground to bypass focus-lock protection.
 ActivateOrLaunch(winQuery, runTarget) {
     prevDH := A_DetectHiddenWindows
     DetectHiddenWindows(true)
@@ -36,17 +64,7 @@ ActivateOrLaunch(winQuery, runTarget) {
             try WinShow(hwnd)
             if WinGetMinMax(hwnd) = -1
                 WinRestore(hwnd)
-            WinActivate(hwnd)
-            Sleep(40)
-            ; If the direct activate was refused by Windows'
-            ; foreground-lock protection, cycle minimize/restore —
-            ; Windows treats that as a legitimate user action.
-            if !WinActive(hwnd) {
-                WinMinimize(hwnd)
-                Sleep(40)
-                WinRestore(hwnd)
-                WinActivate(hwnd)
-            }
+            ForceForeground(hwnd)
             return
         }
     } finally {
@@ -64,7 +82,7 @@ ActivateOrLaunch(winQuery, runTarget) {
         w := 1920
         h := 1080
         WinMove(m.left + (m.width - w) / 2, m.top + m.height - h, w, h, hwnd)
-        WinActivate(hwnd)
+        ForceForeground(hwnd)
     }
 }
 
