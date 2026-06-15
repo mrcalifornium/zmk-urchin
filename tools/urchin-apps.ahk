@@ -269,7 +269,13 @@ SetAudio(deviceId) {
 ^!+h::SetAudio("Jabra Engage 75\Device\Headset Earphone\Render")
 
 ; D = SMSL iDea DAC
-^!+d::SetAudio("3- SMSL iDea v1.2\Device\Speakers\Render")
+; The SMSL has no friendly name in the registry, its device name is
+; the generic "Speakers" (collides with Realtek onboard), and both
+; its MMDevice GUID and "N- " enumeration prefix change on replug —
+; so no static SoundVolumeView string is stable. Instead a helper
+; PowerShell script resolves the current GUID from the stable USB
+; hardware ID (VID_152A & PID_85DD) and sets it default by GUID.
+^!+d::Run('powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Users\aleks\Productivity\zmk-urchin\tools\set-smsl-default.ps1"', , "Hide")
 
 ; ─── Meh + letter volume control (left pinky column) ──────────────
 ; Rate-limited so holding Q or A ramps gently instead of shooting
